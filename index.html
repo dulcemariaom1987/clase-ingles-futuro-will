@@ -1,798 +1,1071 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🚀 Clase de Inglés — Futuro con WILL</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#07070d;--surface:#0d0b18;--card:#131020;--card2:#1a162e;--card3:#221d3a;
-  --purple:#b44fff;--purple-l:#cc77ff;--purple-xl:#e0aaff;--purple-d:#7c22cc;
-  --gold:#ffd700;--gold-l:#ffe55c;--gold-d:#ccaa00;--gold-xl:#fff1a0;
-  --pg:rgba(180,79,255,.2);--gg:rgba(255,215,0,.2);
-  --text:#f0eeff;--dim:#8878aa;--dim2:#6a5f88;
-  --success:#39ff14;--error:#ff3348;
-  --border:rgba(180,79,255,.18);--border2:rgba(255,215,0,.18);
+  --teal:#00E5C8;--teal-dark:#00B8A0;--teal-light:#E0FDF8;
+  --orange:#FF6B2B;--orange-dark:#E05520;--orange-light:#FFF0EA;
+  --bg:#F7FFFE;--surface:#FFFFFF;--surface2:#F0FDFA;
+  --text:#1A2E2B;--text2:#3D5C57;--text3:#6B8E89;
+  --border:#D0F0EB;--shadow:0 4px 20px rgba(0,229,200,0.15);
+  --radius:16px;--radius-sm:10px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;font-size:17px;line-height:1.78;overflow-x:hidden}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--purple);border-radius:3px}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.hero{background:linear-gradient(135deg,#0A2A26 0%,#0D3D37 50%,#0A2A26 100%);color:#fff;padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;left:-60px;width:240px;height:240px;border-radius:50%;background:rgba(0,229,200,0.08);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,107,43,0.08);pointer-events:none}
+.hero-badge{display:inline-block;background:rgba(0,229,200,0.2);border:1.5px solid var(--teal);color:var(--teal);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,6vw,48px);font-weight:900;line-height:1.1;margin-bottom:12px}
+.hero h1 span{color:var(--teal)}
+.hero p{font-size:16px;color:rgba(255,255,255,0.7);max-width:480px;margin:0 auto 24px}
+.hero-meta{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.meta-pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:100px;padding:8px 18px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px}
+.meta-pill svg{width:16px;height:16px;opacity:.8}
 
-/* ── HEADER ── */
-.hdr{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(7,7,13,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(180,79,255,.22);padding:10px 22px 8px}
-.hdr-in{display:flex;align-items:center;justify-content:space-between;max-width:980px;margin:0 auto}
-.hdr-title{font-family:'Outfit',sans-serif;font-size:.8rem;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:2.5px}
-.timer{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:900;color:var(--gold);text-shadow:0 0 14px rgba(255,215,0,.5)}
-.prog-wrap{height:3px;background:rgba(180,79,255,.12);border-radius:2px;margin-top:7px}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:2px;width:0%;transition:width 1s linear;box-shadow:0 0 8px var(--pg)}
+.progress-bar{background:#0D3D37;padding:12px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;border-bottom:2px solid rgba(0,229,200,0.3)}
+.prog-label{font-size:12px;font-weight:700;color:var(--teal);white-space:nowrap}
+.prog-track{flex:1;height:6px;background:rgba(255,255,255,0.1);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--orange));border-radius:100px;transition:width .5s ease;width:0%}
+.prog-pct{font-size:12px;font-weight:800;color:rgba(255,255,255,0.6);white-space:nowrap;min-width:32px}
 
-/* ── LAYOUT ── */
-main{max-width:980px;margin:0 auto;padding:100px 18px 80px}
-.section{margin-bottom:70px}
-.badge{display:inline-flex;align-items:center;gap:7px;background:rgba(180,79,255,.1);border:1px solid rgba(180,79,255,.3);border-radius:50px;padding:4px 15px;font-family:'Outfit',sans-serif;font-size:.76rem;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:13px}
-h2.st{font-family:'Outfit',sans-serif;font-size:2.45rem;font-weight:900;line-height:1.15;margin-bottom:9px}
-.neon{background:linear-gradient(135deg,var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sub{font-size:1rem;color:var(--dim);margin-bottom:24px}
-.divider{height:1px;background:linear-gradient(90deg,var(--purple) 0%,rgba(180,79,255,.06) 65%,transparent);margin:58px 0;opacity:.38}
+.nav{display:flex;gap:8px;padding:20px 24px 0;flex-wrap:wrap;justify-content:center}
+.nav-btn{border:none;background:var(--surface);border:2px solid var(--border);color:var(--text2);font-family:inherit;font-size:13px;font-weight:800;padding:10px 18px;border-radius:100px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.nav-btn:hover{border-color:var(--teal);color:var(--teal-dark)}
+.nav-btn.active{background:var(--teal);border-color:var(--teal);color:#0A2A26}
+.nav-btn .num{width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.1);font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:900}
 
-/* ── WELCOME ── */
-.wcard{background:linear-gradient(135deg,rgba(180,79,255,.08),rgba(255,215,0,.04));border:1px solid rgba(180,79,255,.3);border-radius:22px;padding:42px 36px;text-align:center;position:relative;overflow:hidden}
-.wcard::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(180,79,255,.13),transparent 70%);pointer-events:none}
-.wcard::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,215,0,.08),transparent 70%);pointer-events:none}
-.wemoji{font-size:4.2rem;display:block;margin-bottom:16px}
-.wcard h1{font-family:'Outfit',sans-serif;font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--purple),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:13px}
-.lead{font-size:1.07rem;color:var(--dim);max-width:580px;margin:0 auto 10px}
-.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px}
-.chip{background:rgba(180,79,255,.09);border:1px solid rgba(180,79,255,.28);border-radius:50px;padding:6px 17px;font-size:.88rem;font-weight:700;color:var(--purple)}
+.section{display:none;padding:24px;max-width:760px;margin:0 auto;animation:fadeIn .3s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── TIP / INFO BOXES ── */
-.tip{background:rgba(255,215,0,.06);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 18px;margin:16px 0;font-size:.94rem;color:var(--dim)}
-.tip strong{color:var(--gold)}
-.info-box{background:rgba(180,79,255,.07);border-left:3px solid var(--purple);border-radius:0 12px 12px 0;padding:13px 18px;margin:16px 0;font-size:.94rem;color:var(--dim)}
-.info-box strong{color:var(--purple-l)}
-.warn-box{background:rgba(255,51,72,.06);border-left:3px solid var(--error);border-radius:0 12px 12px 0;padding:13px 18px;margin:16px 0;font-size:.94rem;color:var(--dim)}
-.warn-box strong{color:#ff6680}
+.card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;position:relative}
+.card-accent{border-left:5px solid var(--teal)}
+.card-orange{border-left:5px solid var(--orange)}
 
-/* ── USE CASES GRID ── */
-.uses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin:20px 0}
-.use-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
-.use-icon{font-size:1.8rem;display:block;margin-bottom:8px}
-.use-title{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800;color:var(--purple-l);margin-bottom:4px}
-.use-desc{font-size:.86rem;color:var(--dim)}
-.use-ex{font-size:.82rem;color:rgba(255,215,0,.7);font-style:italic;margin-top:6px;cursor:pointer}
-.use-ex:hover{color:var(--gold);text-decoration:underline}
+.section-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:16px}
+.tag-teal{background:var(--teal-light);color:var(--teal-dark)}
+.tag-orange{background:var(--orange-light);color:var(--orange-dark)}
+.tag-purple{background:#F0EEFF;color:#6B4FD6}
 
-/* ── FORMULA BOXES ── */
-.formula-box{background:rgba(180,79,255,.08);border:2px solid rgba(180,79,255,.3);border-radius:14px;padding:20px 22px;margin:20px 0}
-.formula-box.neg{background:rgba(255,51,72,.07);border-color:rgba(255,51,72,.3)}
-.formula-box.qst{background:rgba(255,215,0,.06);border-color:rgba(255,215,0,.3)}
-.formula-box .flabel{font-family:'Outfit',sans-serif;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
-.formula-box .flabel.af{color:var(--purple)}
-.formula-box .flabel.ng{color:#ff6680}
-.formula-box .flabel.qs{color:var(--gold)}
-.formula{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:900;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.formula .ps{color:var(--purple-l)}
-.formula .wl{color:var(--gold);background:rgba(255,215,0,.1);padding:2px 10px;border-radius:6px;font-size:1.6rem}
-.formula .wl.red{color:#ff6680;background:rgba(255,51,72,.1)}
-.formula .wl.yel{color:var(--gold);background:rgba(255,215,0,.1)}
-.formula .vb{color:var(--purple-l);background:rgba(180,79,255,.1);padding:2px 10px;border-radius:6px}
-.formula .rs{color:var(--dim);font-weight:500;font-size:1.1rem}
-.formula .plus{color:rgba(255,255,255,.25);font-weight:300;font-size:1.2rem}
-.fex{font-size:.92rem;color:var(--dim);margin-top:4px;cursor:pointer;transition:color .2s;display:flex;align-items:flex-start;gap:6px}
-.fex:hover{color:var(--text)}
-.fex em{font-style:normal;cursor:pointer}
-.fex .eng{color:var(--gold);font-weight:700}
-.fex .eng:hover{text-decoration:underline}
-.fex .eng.red{color:#ff6680}
-.fex .eng.pur{color:var(--purple-l)}
+.section-title{font-size:clamp(22px,4vw,30px);font-weight:900;color:var(--text);margin-bottom:8px;line-height:1.2}
+.section-sub{font-size:15px;color:var(--text2);margin-bottom:24px;line-height:1.6}
 
-.formula-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0}
+.grammar-box{background:linear-gradient(135deg,#0A2A26,#0D3D37);border-radius:var(--radius);padding:28px;color:#fff;margin:20px 0;position:relative;overflow:hidden}
+.grammar-box::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:rgba(0,229,200,0.06);border-radius:50%;transform:translate(30%,-30%)}
+.grammar-box h3{color:var(--teal);font-size:14px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.formula{background:rgba(0,229,200,0.1);border:1.5px solid rgba(0,229,200,0.3);border-radius:var(--radius-sm);padding:16px 20px;font-size:clamp(16px,3vw,22px);font-weight:800;text-align:center;color:#fff;margin:12px 0;letter-spacing:1px}
+.formula span.s{color:var(--teal)}
+.formula span.o{color:var(--orange)}
+.formula span.g{color:#B8E87A}
+.formula-label{font-size:12px;color:rgba(255,255,255,0.5);text-align:center;margin-top:4px}
 
-/* ── CONTRACTIONS TABLE ── */
-.cont-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:9px;margin:16px 0}
-.cont-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 15px;cursor:pointer;transition:all .18s;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
-.cont-card:hover{border-color:rgba(180,79,255,.5);background:rgba(180,79,255,.07);transform:translateY(-2px);box-shadow:0 8px 22px rgba(180,79,255,.13)}
-.cont-full{font-size:.86rem;color:var(--dim);font-weight:600}
-.cont-arrow{color:rgba(180,79,255,.4);font-size:.9rem}
-.cont-short{font-family:'Outfit',sans-serif;font-size:1.35rem;font-weight:900;color:var(--purple)}
-.cont-hint{font-size:.68rem;color:rgba(180,79,255,.4);margin-top:3px}
+.example-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.05);border-radius:var(--radius-sm);padding:12px 16px;margin:8px 0}
+.example-row .flag{font-size:20px}
+.example-row .eng{font-size:16px;font-weight:700;color:var(--teal);flex:1}
+.example-row .spa{font-size:14px;color:rgba(18, 141, 11, 0.6)}
+.example-row .play-btn{background:rgba(0,229,200,0.2);border:1.5px solid var(--teal);color:var(--teal);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s;font-size:16px}
+.example-row .play-btn:hover{background:var(--teal);color:#0A2A26;transform:scale(1.1)}
 
-/* ── TIME MARKERS ── */
-.time-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px;margin:16px 0}
-.tcard{background:var(--card);border:1px solid var(--border2);border-radius:11px;padding:12px 14px;cursor:pointer;transition:all .18s}
-.tcard:hover{background:rgba(255,215,0,.07);border-color:rgba(255,215,0,.45);transform:translateY(-2px)}
-.tc-en{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:800;color:var(--gold)}
-.tc-es{font-size:.84rem;color:var(--dim)}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0}
+.vocab-card{background:var(--surface2);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.vocab-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:var(--shadow)}
+.vocab-card.flipped{background:var(--teal-light);border-color:var(--teal)}
+.vocab-card .word{font-size:18px;font-weight:900;color:var(--text);display:block}
+.vocab-card .phonetic{font-size:11px;color:var(--text3);margin:2px 0 6px;font-style:italic}
+.vocab-card .translation{font-size:13px;font-weight:700;color:var(--teal-dark);display:none}
+.vocab-card.flipped .translation{display:block}
+.vocab-card .play-mini{position:absolute;top:8px;right:8px;background:var(--teal);color:#0A2A26;border:none;border-radius:50%;width:28px;height:28px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:900}
 
-/* ── SHORT ANSWERS ── */
-.sa-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
-.sa-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px 18px}
-.sa-q{font-size:.84rem;color:var(--dim);margin-bottom:8px;font-style:italic}
-.sa-yes{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:800;color:var(--success);cursor:pointer;display:inline-block;margin-right:14px}
-.sa-no{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:800;color:var(--error);cursor:pointer;display:inline-block}
+.audio-player{background:linear-gradient(135deg,#FF6B2B,#E05520);border-radius:var(--radius);padding:20px 24px;color:#fff;display:flex;align-items:center;gap:16px;margin:16px 0;cursor:pointer;transition:all .2s;box-shadow:0 6px 24px rgba(255,107,43,0.3)}
+.audio-player:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,107,43,0.4)}
+.audio-btn{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;transition:all .2s}
+.audio-player:hover .audio-btn{background:rgba(255,255,255,0.3)}
+.audio-info{flex:1}
+.audio-title{font-size:15px;font-weight:800;margin-bottom:3px}
+.audio-sub{font-size:12px;opacity:.8}
+.audio-wave{display:flex;align-items:center;gap:3px;height:24px}
+.audio-wave span{display:block;width:3px;background:rgba(255,255,255,0.6);border-radius:2px;animation:wave 1.2s ease-in-out infinite}
+.audio-wave span:nth-child(1){height:8px;animation-delay:0s}
+.audio-wave span:nth-child(2){height:16px;animation-delay:.15s}
+.audio-wave span:nth-child(3){height:24px;animation-delay:.3s}
+.audio-wave span:nth-child(4){height:14px;animation-delay:.45s}
+.audio-wave span:nth-child(5){height:10px;animation-delay:.6s}
+.audio-wave span:nth-child(6){height:20px;animation-delay:.75s}
+.audio-wave span:nth-child(7){height:6px;animation-delay:.9s}
+@keyframes wave{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.5)}}
+.audio-wave.paused span{animation-play-state:paused}
 
-/* ── AUDIO CARD ── */
-.acard{background:var(--card2);border:2px solid rgba(180,79,255,.32);border-radius:18px;padding:26px 28px;margin-bottom:24px}
-.atop{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-bottom:14px}
-.btn-play{background:linear-gradient(135deg,var(--purple),var(--purple-d));border:none;border-radius:50px;padding:11px 26px;font-family:'Outfit',sans-serif;font-size:.96rem;font-weight:700;color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .18s;box-shadow:0 4px 18px rgba(180,79,255,.28)}
-.btn-play:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(180,79,255,.45)}
-.btn-play:active{transform:translateY(0)}
-@keyframes ppulse{0%,100%{box-shadow:0 4px 18px rgba(180,79,255,.28)}50%{box-shadow:0 6px 36px rgba(180,79,255,.65)}}
-.btn-play.playing{animation:ppulse 1.2s ease infinite}
-.btn-reveal{background:transparent;border:1px solid rgba(255,215,0,.28);border-radius:50px;padding:9px 20px;font-family:'Outfit',sans-serif;font-size:.87rem;font-weight:600;color:var(--gold);cursor:pointer;transition:all .18s}
-.btn-reveal:hover{background:rgba(255,215,0,.08);border-color:var(--gold)}
-.script-box{background:rgba(0,0,0,.42);border-radius:11px;padding:16px 19px;font-size:.93rem;line-height:1.9;color:var(--dim);display:none;margin-top:12px}
-.script-box.show{display:block}
-.script-box em{color:var(--purple-l);font-style:normal;font-weight:700}
+.reading-text{background:var(--surface2);border:2px solid var(--border);border-radius:var(--radius);padding:24px;font-size:16px;line-height:2;color:var(--text);position:relative;margin:16px 0}
+.reading-text .highlight{background:rgba(0,229,200,0.2);border-bottom:2px solid var(--teal);border-radius:4px;padding:0 2px;cursor:help;font-weight:700;color:var(--teal-dark)}
+.tooltip{position:relative;display:inline-block}
+.tooltip:hover::after{content:attr(data-tip);position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#0A2A26;color:#fff;font-size:12px;padding:6px 10px;border-radius:8px;white-space:nowrap;z-index:50;font-family:'Nunito',sans-serif;font-weight:600;pointer-events:none}
 
-/* ── QUESTIONS ── */
-.qlist{display:flex;flex-direction:column;gap:14px;margin-top:18px}
-.qcard{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:17px}
-.qtext{font-size:.97rem;font-weight:700;margin-bottom:11px}
-.qnum{color:var(--purple);font-family:'Outfit',sans-serif;font-weight:900}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.opt{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:10px;padding:10px 13px;text-align:left;color:var(--text);cursor:pointer;font-size:.9rem;font-family:'Nunito',sans-serif;transition:all .18s;line-height:1.4}
-.opt:hover:not(.done){border-color:var(--purple);background:rgba(180,79,255,.07)}
-.opt.correct{background:rgba(57,255,20,.09);border-color:var(--success);color:var(--success);font-weight:700}
-.opt.wrong{background:rgba(255,51,72,.09);border-color:var(--error);color:var(--error)}
-.qfb{margin-top:8px;font-size:.87rem;font-weight:700;display:none}
-.qfb.show{display:block}.qfb.ok{color:var(--success)}.qfb.fail{color:var(--error)}
+.question-block{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-sm);padding:20px;margin:12px 0;transition:border-color .2s}
+.question-block:hover{border-color:var(--teal)}
+.question-block .q-num{font-size:11px;font-weight:900;color:var(--teal-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.question-block .q-text{font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.5}
+.options{display:flex;flex-direction:column;gap:8px}
+.opt{border:2px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;cursor:pointer;font-size:14px;font-weight:600;color:var(--text2);transition:all .2s;text-align:left;background:var(--surface);font-family:inherit;display:flex;align-items:center;gap:10px}
+.opt:hover{border-color:var(--teal);color:var(--teal-dark);background:var(--teal-light)}
+.opt.selected-correct{border-color:#22C55E;background:#F0FDF4;color:#15803D}
+.opt.selected-wrong{border-color:#EF4444;background:#FFF5F5;color:#B91C1C}
+.opt .opt-letter{width:26px;height:26px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0}
 
-/* ── READING ── */
-.rbox{background:var(--card2);border:2px solid rgba(255,215,0,.2);border-radius:18px;padding:28px;font-size:1.04rem;line-height:2.15;margin-bottom:24px}
-.v{color:var(--purple-l);font-weight:800;cursor:pointer;border-bottom:2px solid rgba(180,79,255,.35);transition:background .18s;display:inline}
-.v:hover{background:rgba(180,79,255,.1);border-radius:4px}
-.v.wont{color:#ff6680;border-bottom-color:rgba(255,51,72,.35)}
-.v.wont:hover{background:rgba(255,51,72,.1)}
-.v.will{color:var(--gold);border-bottom-color:rgba(255,215,0,.35)}
-.v.will:hover{background:rgba(255,215,0,.1)}
-.audio-sent-btn{display:inline-flex;align-items:center;gap:5px;background:rgba(180,79,255,.1);border:1px solid rgba(180,79,255,.28);border-radius:50px;padding:4px 12px;font-size:.79rem;font-weight:700;color:var(--purple);cursor:pointer;margin-bottom:14px;transition:all .18s}
-.audio-sent-btn:hover{background:rgba(180,79,255,.2)}
-.reading-legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--dim)}
-.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.legend-dot.af{background:var(--gold)}
-.legend-dot.neg{background:#ff6680}
-.legend-dot.wv{background:var(--purple-l)}
+.writing-area{width:100%;border:2px solid var(--border);border-radius:var(--radius-sm);padding:16px;font-size:16px;font-family:inherit;color:var(--text);background:var(--surface2);resize:vertical;min-height:80px;transition:border-color .2s;line-height:1.6}
+.writing-area:focus{outline:none;border-color:var(--teal);background:#fff}
+.writing-prompt{font-size:14px;font-weight:700;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.writing-prompt::before{content:'✏️'}
+.char-count{font-size:11px;color:var(--text3);text-align:right;margin-top:4px}
+.check-btn{background:var(--teal);color:#0A2A26;border:none;border-radius:var(--radius-sm);padding:12px 24px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s;margin-top:12px}
+.check-btn:hover{background:var(--teal-dark);transform:translateY(-1px)}
+.check-btn.orange{background:var(--orange);color:#fff}
+.check-btn.orange:hover{background:var(--orange-dark)}
+.feedback{display:none;margin-top:12px;padding:14px 18px;border-radius:var(--radius-sm);font-size:14px;font-weight:700;line-height:1.5}
+.feedback.show{display:block}
+.feedback.good{background:#F0FDF4;border:2px solid #86EFAC;color:#15803D}
+.feedback.bad{background:#FFF5F5;border:2px solid #FCA5A5;color:#B91C1C}
+.feedback.info{background:var(--teal-light);border:2px solid var(--teal);color:var(--teal-dark)}
 
-/* ── WRITING ── */
-.wordbank{display:flex;flex-wrap:wrap;gap:8px;background:rgba(255,215,0,.04);border:1px solid rgba(255,215,0,.16);border-radius:13px;padding:14px;margin-bottom:20px}
-.wb-word{background:rgba(255,215,0,.09);border:1px solid rgba(255,215,0,.32);border-radius:50px;padding:5px 14px;font-family:'Outfit',sans-serif;font-weight:700;color:var(--gold);font-size:.92rem;cursor:pointer;transition:all .18s;user-select:none;white-space:nowrap}
-.wb-word:hover{background:rgba(255,215,0,.18)}
-.fill-list{display:flex;flex-direction:column;gap:12px}
-.fill-item{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:16px 18px}
-.fill-sent{font-size:.99rem;margin-bottom:8px;line-height:1.9;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.fill-in{background:rgba(255,255,255,.05);border:2px solid rgba(180,79,255,.28);border-radius:8px;padding:5px 13px;font-size:.92rem;color:var(--text);font-family:'Nunito',sans-serif;width:155px;outline:none;transition:border-color .2s}
-.fill-in:focus{border-color:var(--purple)}
-.fill-in.ok{border-color:var(--success);color:var(--success);background:rgba(57,255,20,.05)}
-.fill-in.bad{border-color:var(--error);color:var(--error);background:rgba(255,51,72,.05)}
-.fill-hint{font-size:.79rem;color:var(--dim);margin-top:2px}
-.fill-hint.ok{color:var(--success)}.fill-hint.bad{color:var(--error)}
-.sbtn{display:inline-flex;align-items:center;justify-content:center;background:rgba(180,79,255,.1);border:1px solid rgba(180,79,255,.28);border-radius:50px;padding:3px 10px;font-size:.75rem;font-weight:700;color:var(--purple);cursor:pointer;flex-shrink:0}
-.sbtn:hover{background:rgba(180,79,255,.2)}
-.btn-check{background:linear-gradient(135deg,var(--gold),var(--gold-d));border:none;border-radius:50px;padding:12px 30px;font-family:'Outfit',sans-serif;font-size:.97rem;font-weight:700;color:#000;cursor:pointer;margin-top:20px;transition:all .18s;box-shadow:0 4px 18px rgba(255,215,0,.2)}
-.btn-check:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(255,215,0,.35)}
-.score-box{background:rgba(57,255,20,.07);border:1px solid rgba(57,255,20,.28);border-radius:11px;padding:13px 20px;font-size:1rem;font-weight:700;color:var(--success);margin-top:13px;display:none}
+.tip-box{background:linear-gradient(135deg,var(--orange-light),#FFF8F5);border:2px solid rgba(255,107,43,0.3);border-radius:var(--radius-sm);padding:18px 20px;margin:16px 0;display:flex;gap:14px;align-items:flex-start}
+.tip-icon{font-size:28px;flex-shrink:0;line-height:1}
+.tip-content h4{font-size:14px;font-weight:800;color:var(--orange-dark);margin-bottom:4px}
+.tip-content p{font-size:13px;color:var(--text2);line-height:1.6}
 
-/* ── HOMEWORK ── */
-.hw-wrap{background:linear-gradient(135deg,rgba(180,79,255,.06),rgba(255,215,0,.03));border:2px solid rgba(255,215,0,.2);border-radius:24px;padding:38px 34px}
-.hw-main-title{font-family:'Outfit',sans-serif;font-size:1.85rem;font-weight:900;color:var(--gold);display:flex;align-items:center;gap:11px;margin-bottom:7px}
-.hw-intro{font-size:.96rem;color:var(--dim);margin-bottom:32px}
-.hw-block{margin-bottom:40px}
-.hw-subtitle{font-family:'Outfit',sans-serif;font-size:1.18rem;font-weight:800;color:var(--purple);padding-bottom:8px;border-bottom:1px solid rgba(180,79,255,.22);margin-bottom:15px}
-.trans-list{display:flex;flex-direction:column;gap:12px}
-.trans-item{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:16px 18px}
-.trans-prompt{font-size:.96rem;font-weight:700;color:var(--gold);margin-bottom:8px}
-.trans-in{background:rgba(255,255,255,.05);border:2px solid rgba(180,79,255,.26);border-radius:8px;padding:9px 15px;font-size:.97rem;color:var(--text);font-family:'Nunito',sans-serif;width:100%;outline:none;transition:border-color .2s}
-.trans-in:focus{border-color:var(--purple)}
-.trans-in.ok{border-color:var(--success);color:var(--success);background:rgba(57,255,20,.04)}
-.trans-in.bad{border-color:var(--error)}
-.trans-fb{font-size:.83rem;margin-top:6px;display:none}
-.trans-fb.show{display:block}.trans-fb.ok{color:var(--success)}.trans-fb.bad{color:var(--error)}
+.progress-dots{display:flex;gap:8px;margin:20px 0;justify-content:center}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all .3s}
+.dot.done{background:var(--teal)}
 
-/* ── FOOTER ── */
-.footer{text-align:center;padding:34px 18px;color:var(--dim);font-size:.87rem;border-top:1px solid rgba(180,79,255,.1)}
-.footer strong{color:var(--purple)}
+.bottom-nav{display:flex;gap:12px;justify-content:space-between;margin-top:28px;padding-top:20px;border-top:2px solid var(--border)}
+.btn-prev{background:var(--surface);border:2px solid var(--border);color:var(--text2);border-radius:var(--radius-sm);padding:14px 24px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-prev:hover{border-color:var(--teal);color:var(--teal-dark)}
+.btn-next{background:var(--teal);border:2px solid var(--teal);color:#0A2A26;border-radius:var(--radius-sm);padding:14px 28px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;gap:8px}
+.btn-next:hover{background:var(--teal-dark);border-color:var(--teal-dark);transform:translateY(-2px)}
+.btn-next svg,.btn-prev svg{width:18px;height:18px}
 
-/* ── RESPONSIVE ── */
-@media(max-width:650px){
-  h2.st{font-size:1.8rem}
-  .wcard h1{font-size:1.85rem}
-  .wcard{padding:26px 18px}
-  .formula-row{grid-template-columns:1fr}
-  .cont-grid{grid-template-columns:repeat(2,1fr)}
-  .opts{grid-template-columns:1fr}
-  .hw-wrap{padding:22px 16px}
-  .atop{flex-direction:column;align-items:flex-start}
-  .formula{font-size:1.1rem}
-  .sa-grid{grid-template-columns:1fr}
+.tarea-card{background:linear-gradient(135deg,#0A2A26,#122E28);border-radius:var(--radius);padding:28px;color:#fff;margin-bottom:20px;border:2px solid rgba(0,229,200,0.2)}
+.tarea-badge{background:var(--orange);color:#fff;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;display:inline-block;margin-bottom:16px}
+.tarea-card h3{font-size:20px;font-weight:900;color:#fff;margin-bottom:8px}
+.tarea-card p{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:16px}
+.tarea-inner{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:20px}
+
+.fill-blank{display:inline-block;border-bottom:3px solid var(--teal);min-width:80px;height:28px;margin:0 4px;vertical-align:bottom}
+.fill-input{border:none;border-bottom:3px solid var(--teal);background:transparent;font-size:15px;font-family:inherit;font-weight:700;color:var(--teal-dark);min-width:80px;text-align:center;outline:none;padding:2px 4px}
+.fill-input:focus{border-bottom-color:var(--orange)}
+
+.match-container{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+.match-col h4{font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;text-align:center}
+.match-item{background:var(--surface2);border:2px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;font-size:14px;font-weight:700;color:var(--text);cursor:pointer;margin-bottom:8px;transition:all .2s;text-align:center}
+.match-item:hover{border-color:var(--teal);color:var(--teal-dark)}
+.match-item.selected{border-color:var(--teal);background:var(--teal-light);color:var(--teal-dark)}
+.match-item.matched{border-color:#22C55E;background:#F0FDF4;color:#15803D;cursor:default}
+
+.completed-badge{text-align:center;padding:40px 20px}
+.completed-badge .big-emoji{font-size:64px;display:block;margin-bottom:16px}
+.completed-badge h2{font-size:28px;font-weight:900;color:var(--text);margin-bottom:8px}
+.completed-badge p{font-size:16px;color:var(--text2);line-height:1.6;margin-bottom:24px}
+.stars{font-size:40px;letter-spacing:8px;display:block;margin:16px 0}
+
+.tag-chip{display:inline-block;background:var(--teal-light);color:var(--teal-dark);font-size:11px;font-weight:800;padding:3px 10px;border-radius:100px;margin:2px}
+
+@media(max-width:520px){
+  .match-container{grid-template-columns:1fr}.formula{font-size:14px}.vocab-grid{grid-template-columns:repeat(2,1fr)}
+  .hero{padding:28px 16px 24px}.section{padding:16px}
 }
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.section{animation:fadeUp .4s ease}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="hdr">
-  <div class="hdr-in">
-    <div class="hdr-title">🎓 Clase de Inglés · Futuro con WILL</div>
-    <div class="timer" id="timerDisplay">⏱ 40:00</div>
-  </div>
-  <div class="prog-wrap"><div class="prog-fill" id="progFill"></div></div>
-</header>
-
-<main>
-
-<!-- ══ BIENVENIDA ══ -->
-<div class="section">
-  <div class="wcard">
-    <span class="wemoji">🚀</span>
-    <h1>¡Aprende a Hablar del Futuro en Inglés!</h1>
-    <p class="lead">Hoy aprenderás el <strong style="color:var(--purple-l)">Futuro con WILL</strong> — la forma más común de hablar sobre lo que <em style="color:var(--gold)">va a pasar</em>, tus planes, predicciones y promesas en inglés. ¡Es muy fácil una vez que aprendes la fórmula! 💜</p>
-    <p class="lead" style="margin-top:4px">👆 Haz <strong style="color:var(--gold)">click</strong> en cualquier ejemplo para escuchar su pronunciación en inglés americano 🔊</p>
-    <div class="chips">
-      <span class="chip">⏱ 40 minutos</span>
-      <span class="chip">📐 Gramática</span>
-      <span class="chip">🎙 Listening</span>
-      <span class="chip">📖 Reading</span>
-      <span class="chip">✍️ Writing</span>
-    </div>
+<div class="hero">
+  <div class="hero-badge">🎓 Clase de inglés — Nivel principiante</div>
+  <h1>El Futuro en Inglés:<br><span>WILL</span> 🚀</h1>
+  <p>Aprende a hablar sobre el futuro en inglés americano. ¡40 minutos y estarás hablando del mañana!</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>40 minutos</div>
+    <div class="meta-pill">🎧 Listening · 📖 Reading · ✏️ Writing</div>
+    <div class="meta-pill">🇺🇸 Inglés americano</div>
   </div>
 </div>
 
-<div class="divider"></div>
-
-<!-- ══ TEORÍA: FUTURO CON WILL ══ -->
-<div class="section">
-  <div class="badge">📐 Gramática · 12 min</div>
-  <h2 class="st">El Futuro con <span class="neon">WILL</span><br>en Inglés</h2>
-  <p class="sub">¡Buenas noticias! El futuro con WILL es muy simple: solo necesitas aprender <strong style="color:var(--gold)">UNA sola palabra</strong> — WILL — y listo. ¡La misma para todas las personas!</p>
-
-  <!-- CUÁNDO USARLO -->
-  <!--<h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;margin:28px 0 12px;color:var(--text)">① ¿Cuándo usamos <span class="neon">WILL</span>?</h3>
-  <div class="uses-grid" id="usesGrid"></div>-->
-
-  <!-- TIME MARKERS -->
-  <!--<h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;margin:30px 0 12px;color:var(--text)">② Palabras del Tiempo <span class="neon">Futuro</span></h3>
-  <p style="color:var(--dim);font-size:.95rem;margin-bottom:14px">Estas palabras son una señal de que debes usar WILL. <strong style="color:var(--gold)">¡Haz click para escucharlas!</strong></p>
-  <div class="time-grid" id="timeGrid"></div>-->
-
-  <!-- AFFIRMATIVE -->
-  <h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;margin:30px 0 12px;color:var(--text)">③ Forma <span class="neon">Afirmativa</span></h3>
-  <p style="color:var(--dim);font-size:.95rem;margin-bottom:14px">Para hablar de planes, predicciones y promesas en el futuro. ¡La fórmula es igual para todas las personas!</p>
-
-  <div class="formula-box">
-    <div class="flabel af">📌 Fórmula Afirmativa</div>
-    <div class="formula">
-      <span class="ps">Sujeto</span>
-      <span class="plus">+</span>
-      <span class="wl">WILL</span>
-      <span class="plus">+</span>
-      <span class="vb">verbo base</span>
-      <span class="plus">+</span>
-      <span class="rs">…</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:7px;margin-top:6px">
-      <div class="fex">🔊 <em><span class="eng" onclick="speak('I will travel to Paris next year.')">I <strong>will travel</strong> to Paris next year.</span></em> <span style="color:var(--dim)">(Yo <strong>viajaré</strong> a París el próximo año.)</span></div>
-      <div class="fex">🔊 <em><span class="eng" onclick="speak('She will study medicine at university.')">She <strong>will study</strong> medicine at university.</span></em> <span style="color:var(--dim)">(Ella <strong>estudiará</strong> medicina en la universidad.)</span></div>
-      <div class="fex">🔊 <em><span class="eng" onclick="speak('They will get married next summer.')">They <strong>will get</strong> married next summer.</span></em> <span style="color:var(--dim)">(Ellos <strong>se casarán</strong> el próximo verano.)</span></div>
-      <div class="fex">🔊 <em><span class="eng" onclick="speak('It will rain tomorrow.')">It <strong>will rain</strong> tomorrow.</span></em> <span style="color:var(--dim)">(Mañana <strong>lloverá</strong>.)</span></div>
-    </div>
-  </div>
-
-  <!-- CONTRACCIONES -->
-  <h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;margin:30px 0 10px;color:var(--text)">④ Las <span class="neon">Contracciones</span> de WILL</h3>
-  <p style="color:var(--dim);font-size:.95rem;margin-bottom:14px">Al hablar rápido, la gente combina el sujeto con WILL. ¡Así suenan más naturales! Haz click para escuchar cada una.</p>
-
-  <div class="tip">
-    <strong>💡 Dato importante:</strong> En conversaciones reales y en canciones, casi siempre verás la forma contraída: <strong style="color:var(--gold)">"I'll"</strong>, <strong style="color:var(--gold)">"she'll"</strong>, etc. Es exactamente lo mismo que "I will", "she will". ¡Usarlas te hace sonar más natural!
-  </div>
-  <div class="cont-grid" id="contGrid"></div>
-
-  <!-- NEGATIVE -->
-  <h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;margin:30px 0 12px;color:var(--text)">⑤ Forma <span class="neon">Negativa</span> — WON'T</h3>
-  <p style="color:var(--dim);font-size:.95rem;margin-bottom:14px">Para decir que algo <strong style="color:var(--text)">NO va a ocurrir</strong> en el futuro, usamos <strong style="color:#ff6680">WON'T</strong> (= will not, contracción).</p>
-
-  <div class="formula-box neg">
-    <div class="flabel ng">❌ Fórmula Negativa</div>
-    <div class="formula">
-      <span class="ps">Sujeto</span>
-      <span class="plus">+</span>
-      <span class="wl red">WON'T</span>
-      <span class="plus">+</span>
-      <span class="vb">verbo base</span>
-      <span class="plus">+</span>
-      <span class="rs">…</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:7px;margin-top:6px">
-      <div class="fex">🔊 <em><span class="eng red" onclick="speak('I won\'t eat meat anymore.')">I <strong>won't eat</strong> meat anymore.</span></em> <span style="color:var(--dim)">(Yo <strong>no comeré</strong> carne nunca más.)</span></div>
-      <div class="fex">🔊 <em><span class="eng red" onclick="speak('He won\'t come to the party.')">He <strong>won't come</strong> to the party.</span></em> <span style="color:var(--dim)">(Él <strong>no vendrá</strong> a la fiesta.)</span></div>
-      <div class="fex">🔊 <em><span class="eng red" onclick="speak('They won\'t forget your birthday.')">They <strong>won't forget</strong> your birthday.</span></em> <span style="color:var(--dim)">(Ellos <strong>no olvidarán</strong> tu cumpleaños.)</span></div>
-    </div>
-  </div>
-
-  <div class="warn-box">
-    <strong>⚠️ ¡Recuerda!</strong> <strong style="color:#ff6680">WON'T</strong> = <strong style="color:#ff6680">WILL NOT</strong>. Son exactamente lo mismo. La forma contraída se usa siempre al hablar, y también muy seguido al escribir. Verbo siempre en <strong style="color:var(--text)">forma base</strong> después de WON'T.
-  </div>
-
-  <!-- QUESTIONS -->
-  <h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;margin:30px 0 12px;color:var(--text)">⑥ <span class="neon">Preguntas</span> con WILL</h3>
-  <p style="color:var(--dim);font-size:.95rem;margin-bottom:14px">Para hacer preguntas sobre el futuro, ponemos <strong style="color:var(--gold)">WILL</strong> al inicio de la oración, antes del sujeto.</p>
-
-  <div class="formula-box qst">
-    <div class="flabel qs">❓ Fórmula de Pregunta</div>
-    <div class="formula">
-      <span class="wl yel">WILL</span>
-      <span class="plus">+</span>
-      <span class="ps">sujeto</span>
-      <span class="plus">+</span>
-      <span class="vb">verbo base</span>
-      <span class="plus">+</span>
-      <span class="rs">…?</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:7px;margin-top:6px">
-      <div class="fex">🔊 <em><span class="eng" onclick="speak('Will you come to the party?')"><strong>Will you come</strong> to the party?</span></em> <span style="color:var(--dim)">(¿<strong>Vendrás</strong> a la fiesta?)</span></div>
-      <div class="fex">🔊 <em><span class="eng" onclick="speak('Will she pass the exam?')"><strong>Will she pass</strong> the exam?</span></em> <span style="color:var(--dim)">(¿<strong>Pasará</strong> ella el examen?)</span></div>
-      <div class="fex">🔊 <em><span class="eng" onclick="speak('Will it be cold tomorrow?')"><strong>Will it be</strong> cold tomorrow?</span></em> <span style="color:var(--dim)">(¿<strong>Hará</strong> frío mañana?)</span></div>
-    </div>
-  </div>
-
-  <!-- SHORT ANSWERS -->
-  <h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;margin:30px 0 12px;color:var(--text)">⑦ Respuestas <span class="neon">Cortas</span></h3>
-  <p style="color:var(--dim);font-size:.95rem;margin-bottom:14px">Cuando alguien te hace una pregunta con WILL, puedes responder de forma corta así:</p>
-
-  <div class="sa-grid" id="saGrid"></div>
-
-  <div class="info-box" style="margin-top:14px">
-    <strong>📝 Resumen de las Fórmulas:</strong>
-    <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px;font-size:.93rem">
-      <div>✅ <strong style="color:var(--gold)">Afirmativa:</strong> Subject + <strong style="color:var(--gold)">WILL</strong> + verb → <span onclick="speak('I will study tomorrow.')" style="cursor:pointer;color:var(--purple-l)">I <strong>will study</strong> tomorrow.</span></div>
-      <div>❌ <strong style="color:#ff6680">Negativa:</strong> Subject + <strong style="color:#ff6680">WON'T</strong> + verb → <span onclick="speak('I won\'t study tomorrow.')" style="cursor:pointer;color:#ff6680">I <strong>won't study</strong> tomorrow.</span></div>
-      <div>❓ <strong style="color:var(--gold)">Pregunta:</strong> <strong style="color:var(--gold)">WILL</strong> + subject + verb? → <span onclick="speak('Will you study tomorrow?')" style="cursor:pointer;color:var(--gold)"><strong>Will</strong> you study tomorrow?</span></div>
-    </div>
-  </div>
+<div class="progress-bar">
+  <span class="prog-label">Progreso</span>
+  <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+  <span class="prog-pct" id="progPct">0%</span>
 </div>
 
-<div class="divider"></div>
+<nav class="nav">
+  <button class="nav-btn active" onclick="goTo(0)"><span class="num">1</span> Intro</button>
+  <button class="nav-btn" onclick="goTo(1)"><span class="num">2</span> Gramática</button>
+  <button class="nav-btn" onclick="goTo(2)"><span class="num">3</span> Vocabulario</button>
+  <button class="nav-btn" onclick="goTo(3)"><span class="num">4</span> Listening</button>
+  <button class="nav-btn" onclick="goTo(4)"><span class="num">5</span> Reading</button>
+  <button class="nav-btn" onclick="goTo(5)"><span class="num">6</span> Writing</button>
+  <button class="nav-btn" onclick="goTo(6)"><span class="num">7</span> Repaso</button>
+  <button class="nav-btn" onclick="goTo(7)"><span class="num">🏠</span> Tarea</button>
+</nav>
 
-<!-- ══ LISTENING ══ -->
-<div class="section">
-  <div class="badge">🎙 Listening · 8 min</div>
-  <h2 class="st"><span class="neon">Práctica</span> de<br>Comprensión Auditiva</h2>
-  <p class="sub">Escucha con atención y presta especial atención cuando escuches la palabra <strong style="color:var(--gold)">WILL</strong> y <strong style="color:#ff6680">WON'T</strong>.</p>
-  <div class="tip">
-    <strong>🎯 Instrucciones:</strong> Presiona <strong style="color:var(--purple-l)">▶ Reproducir Audio</strong> para escuchar la grabación en inglés americano. Puedes escucharla cuantas veces quieras. Luego responde las 5 preguntas.
-  </div>
-  <div class="acard">
-    <div class="atop">
-      <button class="btn-play" id="playBtn1" onclick="playAudio('class')">▶ Reproducir Audio</button>
-      <button class="btn-reveal" onclick="toggleScript('sc1',this)">👁 Ver transcripción</button>
+<!-- ═══════════════════════════════════════════ SECCIÓN 0: INTRO -->
+<section class="section active" id="sec0">
+  <div class="section-tag tag-teal">🌟 Bienvenida</div>
+  <h2 class="section-title">¿Qué vamos a aprender hoy?</h2>
+  <p class="section-sub">En esta clase aprenderás a expresar el <strong>futuro</strong> en inglés usando la palabra mágica: <strong style="color:var(--teal-dark);font-size:18px">WILL</strong>. ¡Es muy fácil y te va a servir muchísimo!</p>
+
+  <div class="card card-accent">
+    <div class="section-tag tag-teal" style="margin-bottom:12px">🎯 Objetivos de la clase</div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px">1️⃣</span><div><strong>Escuchar</strong> conversaciones en inglés americano sobre planes futuros (Listening)</div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px">2️⃣</span><div><strong>Leer</strong> un texto corto usando WILL (Reading)</div></div>
+      <div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:20px">3️⃣</span><div><strong>Escribir</strong> tus propias oraciones sobre el futuro (Writing)</div></div>
     </div>
-    <div class="script-box" id="sc1">
-      <strong style="color:var(--purple);font-family:'Outfit'">📄 Transcripción:</strong><br><br>
-      "Hi! My name is Sophie. I have big plans for the future! Next year, I <em>will travel</em> to Japan. I <em>will visit</em> Tokyo and see the famous temples. I <em>will also study</em> Japanese before I go. My friend Tom <em>will come</em> with me. We <em>will eat</em> delicious sushi and ramen every day! I <em>will take</em> many photos and share them with my family. I <em>won't forget</em> to buy souvenirs for everyone. I think it <em>will be</em> the best trip of my life! I am so excited. What <em>will</em> you do in the future?"
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-icon">💡</div>
+    <div class="tip-content">
+      <h4>¿Cuándo usamos WILL?</h4>
+      <p>Usamos <strong>WILL</strong> cuando hablamos de algo que <em>va a pasar en el futuro</em>: una promesa, una predicción, una decisión tomada en el momento. ¡Es como decir "voy a..." o "haré..." en español!</p>
     </div>
   </div>
-  <p style="font-weight:800;margin-bottom:12px;font-size:1.01rem">❓ Responde las preguntas sobre el audio:</p>
-  <div class="qlist" id="listenQs"></div>
-</div>
 
-<div class="divider"></div>
-
-<!-- ══ READING ══ -->
-<div class="section">
-  <div class="badge">📖 Reading · 8 min</div>
-  <h2 class="st"><span class="neon">Práctica</span> de<br>Comprensión Lectora</h2>
-  <p class="sub">Lee el texto. <span style="color:var(--gold)">Dorado = WILL (afirmativo)</span> · <span style="color:#ff6680">Rosa = WON'T (negativo)</span> · <span style="color:var(--purple-l)">Morado = verbo principal</span>. Haz click para escuchar.</p>
-  <div class="tip">
-    <strong>📌 Estrategia:</strong> Lee el texto completo primero sin detenerte. Luego responde las preguntas buscando la información en el texto. ¡Todo lo que necesitas está ahí!
-  </div>
-  <div class="rbox">
-    <div class="reading-legend">
-      <div class="legend-item"><div class="legend-dot af"></div>WILL (afirmativo)</div>
-      <div class="legend-item"><div class="legend-dot neg"></div>WON'T (negativo)</div>
-      <div class="legend-item"><div class="legend-dot wv"></div>verbo principal</div>
+  <div class="card" style="background:linear-gradient(135deg,var(--teal-light),#fff);border-color:var(--teal)">
+    <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px">🗣️ Mira estos ejemplos. Haz clic en el botón ▶️ para escuchar cada uno:</div>
+    <div class="example-row">
+      <div style="flex:1"><div class="eng">I will travel tomorrow.</div><div class="spa">Viajaré mañana.</div></div>
+      <button class="play-btn" onclick="speak('I will travel tomorrow.')">▶</button>
     </div>
-    <button class="audio-sent-btn" onclick="speakFull('Maria is twenty years old and she has many plans for the future. Next month, she will finish her university studies. After that, she will look for a job in a big company. She will work hard and save money. In two years, she will buy her own apartment. She won\'t live with her parents forever! Maria and her boyfriend will get married in the future. They will have two children and they will live in the countryside. Maria believes that if you work hard, everything will be possible. She will never give up on her dreams!')">🔊 Escuchar texto completo</button>
-    <p>
-      Maria is 20 years old and she has many plans for the future. Next month, she <span class="v will" onclick="speak('will finish')">will</span> <span class="v" onclick="speak('finish')">finish</span> her university studies. After that, she <span class="v will" onclick="speak('will look')">will</span> <span class="v" onclick="speak('look for a job')">look</span> for a job in a big company. She <span class="v will" onclick="speak('will work')">will</span> <span class="v" onclick="speak('work hard')">work</span> hard and save money. In two years, she <span class="v will" onclick="speak('will buy')">will</span> <span class="v" onclick="speak('buy her own apartment')">buy</span> her own apartment. She <span class="v wont" onclick="speak('won\'t live')">won't</span> <span class="v" onclick="speak('live with parents')">live</span> with her parents forever! Maria and her boyfriend <span class="v will" onclick="speak('will get married')">will</span> <span class="v" onclick="speak('get married')">get married</span> in the future. They <span class="v will" onclick="speak('will have')">will</span> <span class="v" onclick="speak('have two children')">have</span> two children and they <span class="v will" onclick="speak('will live')">will</span> <span class="v" onclick="speak('live in the countryside')">live</span> in the countryside. Maria believes that if you work hard, everything <span class="v will" onclick="speak('will be possible')">will</span> <span class="v" onclick="speak('be possible')">be</span> possible. She <span class="v will" onclick="speak('will never give up')">will</span> <span class="v" onclick="speak('never give up on her dreams')">never give up</span> on her dreams!
-    </p>
+    <div class="example-row">
+      <div style="flex:1"><div class="eng">She will call you later.</div><div class="spa">Ella te llamará más tarde.</div></div>
+      <button class="play-btn" onclick="speak('She will call you later.')">▶</button>
+    </div>
+    <div class="example-row">
+      <div style="flex:1"><div class="eng">They will not come to the party.</div><div class="spa">Ellos no vendrán a la fiesta.</div></div>
+      <button class="play-btn" onclick="speak('They will not come to the party.')">▶</button>
+    </div>
   </div>
-  <p style="font-weight:800;margin-bottom:12px;font-size:1.01rem">❓ Responde las preguntas sobre el texto:</p>
-  <div class="qlist" id="readQs"></div>
-</div>
 
-<div class="divider"></div>
-
-<!-- ══ WRITING ══ -->
-<div class="section">
-  <div class="badge">✍️ Writing · 7 min</div>
-  <h2 class="st"><span class="neon">Práctica</span><br>de Escritura</h2>
-  <p class="sub">Completa cada oración con la expresión correcta del banco de palabras. ¡Todas ya incluyen WILL o WON'T!</p>
-  <div class="tip">
-    <strong>📝 Instrucciones:</strong> Escoge la expresión correcta del <strong style="color:var(--gold)">banco de palabras</strong> y escríbela en el espacio. Haz click en cada expresión del banco para escuchar cómo suena.
+  <div class="bottom-nav">
+    <div></div>
+    <button class="btn-next" onclick="goTo(1)">Siguiente: Gramática <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
-  <p style="font-weight:700;color:var(--gold);margin-bottom:8px;font-size:.93rem">📦 Banco de Palabras (haz click para escuchar):</p>
-  <div class="wordbank" id="wbank"></div>
-  <div class="fill-list" id="fillList"></div>
-  <br>
-  <button class="btn-check" onclick="checkFill()">✅ Verificar respuestas</button>
-  <div class="score-box" id="fillScore"></div>
-</div>
+</section>
 
-<div class="divider"></div>
+<!-- ═══════════════════════════════════════════ SECCIÓN 1: GRAMÁTICA -->
+<section class="section" id="sec1">
+  <div class="section-tag tag-teal">📐 Gramática</div>
+  <h2 class="section-title">¿Cómo se forma WILL?</h2>
+  <p class="section-sub">La estructura es la misma para todos los pronombres. ¡Sin excepciones! Es la parte más fácil del inglés 😄</p>
 
-<!-- ══ TAREA ══ -->
-<div class="section">
-  <div class="badge">🏠 Tarea para el Hogar</div>
-  <h2 class="st">Tu <span class="neon">Tarea</span> de Hoy</h2>
-  <p class="sub">¡Excelente trabajo en clase! Ahora practica en casa. Todo el material está aquí — no necesitas buscar nada externo. 🎯</p>
+  <div class="grammar-box">
+    <h3>✅ Forma Afirmativa</h3>
+    <div class="formula"><span class="s">Sujeto</span> + <span class="o">will</span> + <span class="g">verbo</span></div>
+    <div class="formula-label">El verbo siempre va en su forma base (sin cambios)</div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
+      <div class="example-row">
+        <div style="flex:1"><div class="eng">I will go to school.</div><div class="spa">Yo iré a la escuela.</div></div>
+        <button class="play-btn" onclick="speak('I will go to school.')">▶</button>
+      </div>
+      <div class="example-row">
+        <div style="flex:1"><div class="eng">He will buy a new phone.</div><div class="spa">Él comprará un teléfono nuevo.</div></div>
+        <button class="play-btn" onclick="speak('He will buy a new phone.')">▶</button>
+      </div>
+      <div class="example-row">
+        <div style="flex:1"><div class="eng">We will win the game.</div><div class="spa">Nosotros ganaremos el juego.</div></div>
+        <button class="play-btn" onclick="speak('We will win the game.')">▶</button>
+      </div>
+    </div>
+  </div>
 
-  <div class="hw-wrap">
-    <div class="hw-main-title">🏠 Tarea para Casa</div>
-    <p class="hw-intro">Dedica unos 20–25 minutos a estos tres ejercicios. Intenta hacerlos sin mirar los apuntes de la clase primero. Si te trabas, puedes volver a revisar las fórmulas. ¡La práctica hace al maestro!</p>
+  <div class="grammar-box" style="margin-top:16px">
+    <h3>❌ Forma Negativa</h3>
+    <div class="formula"><span class="s">Sujeto</span> + <span class="o">will not / won't</span> + <span class="g">verbo</span></div>
+    <div class="formula-label">"won't" es la forma corta de "will not" — ¡se usa mucho en la vida real!</div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
+      <div class="example-row">
+        <div style="flex:1"><div class="eng">I won't eat pizza tonight.</div><div class="spa">No comeré pizza esta noche.</div></div>
+        <button class="play-btn" onclick="speak('I won\'t eat pizza tonight.')">▶</button>
+      </div>
+      <div class="example-row">
+        <div style="flex:1"><div class="eng">She won't study tomorrow.</div><div class="spa">Ella no estudiará mañana.</div></div>
+        <button class="play-btn" onclick="speak('She won\'t study tomorrow.')">▶</button>
+      </div>
+    </div>
+  </div>
 
-    <!-- HW LISTENING -->
-    <div class="hw-block">
-      <div class="hw-subtitle">🎙 Tarea 1 — Listening (Comprensión Auditiva)</div>
-      <p style="color:var(--dim);font-size:.92rem;margin-bottom:13px">Escucha el audio y responde las preguntas. ¡Puedes escucharlo cuantas veces quieras!</p>
-      <div class="acard">
-        <div class="atop">
-          <button class="btn-play" id="hwPlayBtn" onclick="playAudio('hw')">▶ Reproducir Audio</button>
-          <button class="btn-reveal" onclick="toggleScript('hwSc',this)">👁 Ver transcripción</button>
+  <div class="grammar-box" style="margin-top:16px">
+    <h3>❓ Forma Interrogativa</h3>
+    <div class="formula"><span class="o">Will</span> + <span class="s">sujeto</span> + <span class="g">verbo</span>?</div>
+    <div class="formula-label">En las preguntas, WILL va al principio de la oración</div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
+      <div class="example-row">
+        <div style="flex:1"><div class="eng">Will you come to my party?</div><div class="spa">¿Vendrás a mi fiesta?</div></div>
+        <button class="play-btn" onclick="speak('Will you come to my party?')">▶</button>
+      </div>
+      <div class="example-row">
+        <div style="flex:1"><div class="eng">Will it rain tomorrow?</div><div class="spa">¿Lloverá mañana?</div></div>
+        <button class="play-btn" onclick="speak('Will it rain tomorrow?')">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:20px">
+    <div class="tip-icon">🔥</div>
+    <div class="tip-content">
+      <h4>Truco: La forma corta (Contraction)</h4>
+      <p>En la vida real, los americanos casi siempre usan la forma corta: <strong>I'll</strong> (I will), <strong>he'll</strong> (he will), <strong>she'll</strong> (she will), <strong>we'll</strong> (we will), <strong>they'll</strong> (they will). ¡Las escucharás mucho!</p>
+    </div>
+  </div>
+
+  <div style="margin-top:20px">
+    <div class="section-tag tag-orange">🎧 Escucha las contracciones</div>
+    <div class="example-row" style="background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px">
+      <div style="flex:1"><div class="eng">I'll see you tomorrow. She'll be there too.</div><div class="spa">Te veré mañana. Ella también estará allí.</div></div>
+      <button class="play-btn" onclick="speak('I\'ll see you tomorrow. She\'ll be there too.')">▶</button>
+    </div>
+    <div class="example-row" style="background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px">
+      <div style="flex:1"><div class="eng">They'll arrive at eight. We'll eat together.</div><div class="spa">Ellos llegarán a las ocho. Comeremos juntos.</div></div>
+      <button class="play-btn" onclick="speak('They\'ll arrive at eight. We\'ll eat together.')">▶</button>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn-prev" onclick="goTo(0)">← Anterior</button>
+    <button class="btn-next" onclick="goTo(2)">Siguiente: Vocabulario <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECCIÓN 2: VOCABULARIO -->
+<section class="section" id="sec2">
+  <div class="section-tag tag-teal">📚 Vocabulario</div>
+  <h2 class="section-title">Palabras clave para el futuro</h2>
+  <p class="section-sub">Estas palabras te ayudarán a hablar del futuro. <strong>Haz clic en cada tarjeta</strong> para ver la traducción. Presiona el botón ▶ para escuchar la pronunciación.</p>
+
+  <div class="vocab-grid">
+    <div class="vocab-card" id="vc1" onclick="flipCard('vc1')"><button class="play-mini" onclick="event.stopPropagation();speak('tomorrow')">▶</button><span class="word">Tomorrow</span><span class="phonetic">/tuˈmɑːroʊ/</span><span class="translation">Mañana</span></div>
+    <div class="vocab-card" id="vc2" onclick="flipCard('vc2')"><button class="play-mini" onclick="event.stopPropagation();speak('next week')">▶</button><span class="word">Next week</span><span class="phonetic">/nɛkst wiːk/</span><span class="translation">La próxima semana</span></div>
+    <div class="vocab-card" id="vc3" onclick="flipCard('vc3')"><button class="play-mini" onclick="event.stopPropagation();speak('soon')">▶</button><span class="word">Soon</span><span class="phonetic">/suːn/</span><span class="translation">Pronto</span></div>
+    <div class="vocab-card" id="vc4" onclick="flipCard('vc4')"><button class="play-mini" onclick="event.stopPropagation();speak('later')">▶</button><span class="word">Later</span><span class="phonetic">/ˈleɪtər/</span><span class="translation">Más tarde</span></div>
+    <div class="vocab-card" id="vc5" onclick="flipCard('vc5')"><button class="play-mini" onclick="event.stopPropagation();speak('tonight')">▶</button><span class="word">Tonight</span><span class="phonetic">/təˈnaɪt/</span><span class="translation">Esta noche</span></div>
+    <div class="vocab-card" id="vc6" onclick="flipCard('vc6')"><button class="play-mini" onclick="event.stopPropagation();speak('next year')">▶</button><span class="word">Next year</span><span class="phonetic">/nɛkst jɪr/</span><span class="translation">El próximo año</span></div>
+    <div class="vocab-card" id="vc7" onclick="flipCard('vc7')"><button class="play-mini" onclick="event.stopPropagation();speak('maybe')">▶</button><span class="word">Maybe</span><span class="phonetic">/ˈmeɪbi/</span><span class="translation">Quizás / Tal vez</span></div>
+    <div class="vocab-card" id="vc8" onclick="flipCard('vc8')"><button class="play-mini" onclick="event.stopPropagation();speak('probably')">▶</button><span class="word">Probably</span><span class="phonetic">/ˈprɑːbəbli/</span><span class="translation">Probablemente</span></div>
+  </div>
+
+  <div class="tip-box">
+    <div class="tip-icon">🗓️</div>
+    <div class="tip-content">
+      <h4>Estas palabras van con WILL</h4>
+      <p>Cuando dices "tomorrow", "next week" o "soon" en una oración, ¡es una señal de que probablemente necesitas usar WILL! Ejemplo: "I <em>will</em> travel <em>tomorrow</em>."</p>
+    </div>
+  </div>
+
+  <div style="margin-top:20px">
+    <div class="section-tag tag-orange">🎧 Practica las oraciones con vocabulario</div>
+    <div style="font-size:14px;color:var(--text2);margin-bottom:12px">Escucha estas oraciones completas y fíjate cómo se usan las palabras:</div>
+    <div class="example-row" style="background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px">
+      <div style="flex:1"><div class="eng">I will probably study tonight.</div><div class="spa">Probablemente estudiaré esta noche.</div></div>
+      <button class="play-btn" onclick="speak('I will probably study tonight.')">▶</button>
+    </div>
+    <div class="example-row" style="background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px">
+      <div style="flex:1"><div class="eng">Maybe she will visit us next year.</div><div class="spa">Quizás ella nos visitará el próximo año.</div></div>
+      <button class="play-btn" onclick="speak('Maybe she will visit us next year.')">▶</button>
+    </div>
+    <div class="example-row" style="background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px">
+      <div style="flex:1"><div class="eng">We will meet soon. I promise!</div><div class="spa">Nos veremos pronto. ¡Lo prometo!</div></div>
+      <button class="play-btn" onclick="speak('We will meet soon. I promise!')">▶</button>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn-prev" onclick="goTo(1)">← Anterior</button>
+    <button class="btn-next" onclick="goTo(3)">Siguiente: Listening <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECCIÓN 3: LISTENING -->
+<section class="section" id="sec3">
+  <div class="section-tag tag-orange">🎧 Listening</div>
+  <h2 class="section-title">¡A escuchar!</h2>
+  <p class="section-sub">Vas a escuchar una conversación corta entre dos amigos americanos. <strong>Escúchala 2 veces</strong> antes de responder las preguntas. ¡Concéntrate en el contexto general!</p>
+
+  <div class="tip-box">
+    <div class="tip-icon">👂</div>
+    <div class="tip-content">
+      <h4>Consejo antes de escuchar</h4>
+      <p>No te preocupes si no entiendes cada palabra. Enfócate en captar la idea principal: ¿de qué están hablando? ¿qué van a hacer?</p>
+    </div>
+  </div>
+
+  <div class="audio-player" id="apMain" onclick="playListeningAudio()">
+    <div class="audio-btn" id="apBtn">▶</div>
+    <div class="audio-info">
+      <div class="audio-title">🎙️ Conversación: "Weekend Plans" (Planes del fin de semana)</div>
+      <div class="audio-sub">Conversación en inglés americano · ~35 segundos</div>
+    </div>
+    <div class="audio-wave paused" id="apWave">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="card card-accent" style="margin-top:4px">
+    <div style="font-size:13px;font-weight:700;color:var(--text3);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">📜 Transcripción (léela después de escuchar)</div>
+    <div style="font-size:15px;line-height:2;color:var(--text)">
+      <strong style="color:var(--teal-dark)">Maya:</strong> <em>"Hey, what will you do this weekend?"</em><br>
+      <strong style="color:var(--orange-dark)">Jake:</strong> <em>"I'll probably stay home. Maybe I'll watch movies. What about you?"</em><br>
+      <strong style="color:var(--teal-dark)">Maya:</strong> <em>"I will visit my grandmother on Saturday. And on Sunday, I'll go to the park with my dog."</em><br>
+      <strong style="color:var(--orange-dark)">Jake:</strong> <em>"That sounds great! I think it will be sunny this weekend."</em><br>
+      <strong style="color:var(--teal-dark)">Maya:</strong> <em>"Yes! It won't rain. See you on Monday!"</em>
+    </div>
+  </div>
+
+  <div style="margin-top:24px">
+    <div class="section-tag tag-orange">❓ Preguntas de comprensión</div>
+    <div class="question-block">
+      <div class="q-num">Pregunta 1 de 4</div>
+      <div class="q-text">¿Qué hará Jake probablemente este fin de semana?</div>
+      <div class="options">
+        <button class="opt" onclick="checkOpt(this,'A','B','q1')"><span class="opt-letter">A</span>Visitará a su abuela</button>
+        <button class="opt" onclick="checkOpt(this,'B','B','q1')"><span class="opt-letter">B</span>Se quedará en casa</button>
+        <button class="opt" onclick="checkOpt(this,'C','B','q1')"><span class="opt-letter">C</span>Irá al parque</button>
+        <button class="opt" onclick="checkOpt(this,'D','B','q1')"><span class="opt-letter">D</span>Trabajará el domingo</button>
+      </div>
+      <div class="feedback" id="fb-q1"></div>
+    </div>
+    <div class="question-block">
+      <div class="q-num">Pregunta 2 de 4</div>
+      <div class="q-text">¿Qué hará Maya el sábado?</div>
+      <div class="options">
+        <button class="opt" onclick="checkOpt(this,'A','A','q2')"><span class="opt-letter">A</span>Visitará a su abuela</button>
+        <button class="opt" onclick="checkOpt(this,'B','A','q2')"><span class="opt-letter">B</span>Verá películas</button>
+        <button class="opt" onclick="checkOpt(this,'C','A','q2')"><span class="opt-letter">C</span>Irá a trabajar</button>
+        <button class="opt" onclick="checkOpt(this,'D','A','q2')"><span class="opt-letter">D</span>Saldrá con Jake</button>
+      </div>
+      <div class="feedback" id="fb-q2"></div>
+    </div>
+    <div class="question-block">
+      <div class="q-num">Pregunta 3 de 4</div>
+      <div class="q-text">¿Cómo dice Maya que NO lloverá?</div>
+      <div class="options">
+        <button class="opt" onclick="checkOpt(this,'A','C','q3')"><span class="opt-letter">A</span>It will rain</button>
+        <button class="opt" onclick="checkOpt(this,'B','C','q3')"><span class="opt-letter">B</span>It will not rain</button>
+        <button class="opt" onclick="checkOpt(this,'C','C','q3')"><span class="opt-letter">C</span>It won't rain</button>
+        <button class="opt" onclick="checkOpt(this,'D','C','q3')"><span class="opt-letter">D</span>It rains</button>
+      </div>
+      <div class="feedback" id="fb-q3"></div>
+    </div>
+    <div class="question-block">
+      <div class="q-num">Pregunta 4 de 4</div>
+      <div class="q-text">¿Qué tipo de clima cree Jake que habrá?</div>
+      <div class="options">
+        <button class="opt" onclick="checkOpt(this,'A','B','q4')"><span class="opt-letter">A</span>Lluvioso</button>
+        <button class="opt" onclick="checkOpt(this,'B','B','q4')"><span class="opt-letter">B</span>Soleado</button>
+        <button class="opt" onclick="checkOpt(this,'C','B','q4')"><span class="opt-letter">C</span>Nublado</button>
+        <button class="opt" onclick="checkOpt(this,'D','B','q4')"><span class="opt-letter">D</span>Con nieve</button>
+      </div>
+      <div class="feedback" id="fb-q4"></div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn-prev" onclick="goTo(2)">← Anterior</button>
+    <button class="btn-next" onclick="goTo(4)">Siguiente: Reading <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECCIÓN 4: READING -->
+<section class="section" id="sec4">
+  <div class="section-tag tag-teal">📖 Reading</div>
+  <h2 class="section-title">¡A leer!</h2>
+  <p class="section-sub">Lee este texto corto. Las palabras en <span style="color:var(--teal-dark);font-weight:800;background:rgba(0,229,200,0.15);padding:0 4px;border-radius:4px">verde-azul</span> son las formas del futuro con WILL. <strong>Pasa el cursor sobre ellas</strong> para ver su traducción. Luego escucha el texto completo.</p>
+
+  <div class="audio-player" style="background:linear-gradient(135deg,#0A2A26,#0D3D37);border:2px solid rgba(0,229,200,0.3)" onclick="playReadingAudio()">
+    <div class="audio-btn" id="readBtn">▶</div>
+    <div class="audio-info">
+      <div class="audio-title">🔊 Escuchar el texto en voz alta</div>
+      <div class="audio-sub">Inglés americano · lectura completa</div>
+    </div>
+    <div class="audio-wave paused" id="readWave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+
+  <div class="reading-text">
+    <div style="font-size:13px;font-weight:800;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">📝 My Plans for Next Year · Mis planes para el próximo año</div>
+    <p style="margin-bottom:12px">My name is Sam. I have many plans for next year. First, I <span class="tooltip highlight" data-tip="voy a estudiar / estudiaré">will study</span> English every day. I think it <span class="tooltip highlight" data-tip="será / va a ser">will be</span> difficult, but I <span class="tooltip highlight" data-tip="no me rendiré">won't give up</span>.</p>
+    <p style="margin-bottom:12px">Also, I <span class="tooltip highlight" data-tip="voy a buscar">will look for</span> a new job. My friend Sarah <span class="tooltip highlight" data-tip="me ayudará">will help</span> me with my resume. She <span class="tooltip highlight" data-tip="revisará">will review</span> it and give me advice.</p>
+    <p style="margin-bottom:12px">In the summer, my family <span class="tooltip highlight" data-tip="viajará">will travel</span> to the beach. We <span class="tooltip highlight" data-tip="nos quedaremos">will stay</span> there for one week. It <span class="tooltip highlight" data-tip="será / va a ser">will be</span> so much fun!</p>
+    <p>I'm very excited. Next year <span class="tooltip highlight" data-tip="será">will be</span> amazing for me. I <span class="tooltip highlight" data-tip="no me olvidaré">won't forget</span> my goals. <span class="tooltip highlight" data-tip="lo lograré">I'll do it!</span> 💪</p>
+  </div>
+
+  <div style="margin-top:24px">
+    <div class="section-tag tag-teal">❓ Preguntas de comprensión</div>
+    <div class="question-block">
+      <div class="q-num">Pregunta 1 de 3</div>
+      <div class="q-text">¿Qué estudiará Sam todos los días el próximo año?</div>
+      <div class="options">
+        <button class="opt" onclick="checkOpt(this,'A','B','rq1')"><span class="opt-letter">A</span>Matemáticas</button>
+        <button class="opt" onclick="checkOpt(this,'B','B','rq1')"><span class="opt-letter">B</span>Inglés</button>
+        <button class="opt" onclick="checkOpt(this,'C','B','rq1')"><span class="opt-letter">C</span>Historia</button>
+        <button class="opt" onclick="checkOpt(this,'D','B','rq1')"><span class="opt-letter">D</span>Música</button>
+      </div>
+      <div class="feedback" id="fb-rq1"></div>
+    </div>
+    <div class="question-block">
+      <div class="q-num">Pregunta 2 de 3</div>
+      <div class="q-text">¿Quién ayudará a Sam con su currículum (resume)?</div>
+      <div class="options">
+        <button class="opt" onclick="checkOpt(this,'A','C','rq2')"><span class="opt-letter">A</span>Su mamá</button>
+        <button class="opt" onclick="checkOpt(this,'B','C','rq2')"><span class="opt-letter">B</span>Su jefe</button>
+        <button class="opt" onclick="checkOpt(this,'C','C','rq2')"><span class="opt-letter">C</span>Su amiga Sarah</button>
+        <button class="opt" onclick="checkOpt(this,'D','C','rq2')"><span class="opt-letter">D</span>Su profesor</button>
+      </div>
+      <div class="feedback" id="fb-rq2"></div>
+    </div>
+    <div class="question-block">
+      <div class="q-num">Pregunta 3 de 3</div>
+      <div class="q-text">¿A dónde viajará la familia de Sam en el verano?</div>
+      <div class="options">
+        <button class="opt" onclick="checkOpt(this,'A','D','rq3')"><span class="opt-letter">A</span>A las montañas</button>
+        <button class="opt" onclick="checkOpt(this,'B','D','rq3')"><span class="opt-letter">B</span>A la ciudad</button>
+        <button class="opt" onclick="checkOpt(this,'C','D','rq3')"><span class="opt-letter">C</span>Al desierto</button>
+        <button class="opt" onclick="checkOpt(this,'D','D','rq3')"><span class="opt-letter">D</span>A la playa</button>
+      </div>
+      <div class="feedback" id="fb-rq3"></div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn-prev" onclick="goTo(3)">← Anterior</button>
+    <button class="btn-next" onclick="goTo(5)">Siguiente: Writing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECCIÓN 5: WRITING -->
+<section class="section" id="sec5">
+  <div class="section-tag tag-purple">✏️ Writing</div>
+  <h2 class="section-title">¡A escribir!</h2>
+  <p class="section-sub">Hora de practicar escribiendo. Hay 3 tipos de ejercicios. ¡Tómate tu tiempo y piensa bien antes de escribir!</p>
+
+  <div class="card card-accent">
+    <div class="section-tag tag-teal" style="margin-bottom:14px">Ejercicio 1 — Completa el espacio en blanco</div>
+    <div style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.6">Escribe SOLAMENTE la forma correcta de WILL + el verbo entre paréntesis (no debes volver a escribir la oración completa).</div>
+
+    <div id="fillEx1" style="margin-bottom:16px">
+      <div class="writing-prompt">1. She _______ (go) to the gym tomorrow.</div>
+      <input type="text" class="writing-area" style="min-height:44px;height:44px;font-size:16px" id="w1" placeholder="Escribe tu respuesta...">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+        <button class="check-btn" onclick="checkFill('w1',['will go','she will go'],1)">Verificar ✓</button>
+      </div>
+      <div class="feedback" id="fb-w1"></div>
+    </div>
+
+    <div id="fillEx2" style="margin-bottom:16px">
+      <div class="writing-prompt">2. They _______ (not / eat) fast food this week.</div>
+      <input type="text" class="writing-area" style="min-height:44px;height:44px;font-size:16px" id="w2" placeholder="Escribe tu respuesta...">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+        <button class="check-btn" onclick="checkFill('w2',['will not eat','won\'t eat','they will not eat','they won\'t eat'],2)">Verificar ✓</button>
+      </div>
+      <div class="feedback" id="fb-w2"></div>
+    </div>
+
+    <div id="fillEx3" style="margin-bottom:16px">
+      <div class="writing-prompt">3. _______ (Will / you / help) me with this homework?</div>
+      <input type="text" class="writing-area" style="min-height:44px;height:44px;font-size:16px" id="w3" placeholder="Escribe tu respuesta...">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+        <button class="check-btn" onclick="checkFill('w3',['will you help','will you help me'],3)">Verificar ✓</button>
+      </div>
+      <div class="feedback" id="fb-w3"></div>
+    </div>
+  </div>
+
+  <div class="card card-orange" style="margin-top:8px">
+    <div class="section-tag tag-orange" style="margin-bottom:14px">Ejercicio 2 — Ordena las palabras</div>
+    <div style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.6">Ordena las palabras para formar una oración correcta en futuro. Escucha el audio para verificar.</div>
+
+    <div style="margin-bottom:20px">
+      <div class="writing-prompt">4. Palabras: <span class="tag-chip">tomorrow</span><span class="tag-chip">will</span><span class="tag-chip">she</span><span class="tag-chip">work</span></div>
+      <input type="text" class="writing-area" style="min-height:44px;height:44px;font-size:16px" id="w4" placeholder="Forma la oración correcta...">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+        <button class="check-btn orange" onclick="checkFill('w4',['she will work tomorrow.','she will work tomorrow'],4)">Verificar ✓</button>
+      </div>
+      <div class="feedback" id="fb-w4"></div>
+    </div>
+
+    <div>
+      <div class="writing-prompt">5. Palabras: <span class="tag-chip">my</span><span class="tag-chip">not</span><span class="tag-chip">will</span><span class="tag-chip">friend</span><span class="tag-chip">come</span></div>
+      <input type="text" class="writing-area" style="min-height:44px;height:44px;font-size:16px" id="w5" placeholder="Forma la oración correcta...">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+        <button class="check-btn orange" onclick="checkFill('w5',['my friend will not come.','my friend won\'t come.','my friend will not come','my friend won\'t come'],5)">Verificar ✓</button>
+      </div>
+      <div class="feedback" id="fb-w5"></div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:5px solid #9B59B6;background:linear-gradient(135deg,#F8F4FF,#fff);margin-top:8px">
+    <div class="section-tag tag-purple" style="margin-bottom:14px">Ejercicio 3 — Escribe tus propias oraciones</div>
+    <div style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.6">Escribe <strong>3 oraciones</strong> sobre tus planes para el futuro. Usa WILL en cada una. ¡Puedes escribir sobre cualquier cosa que quieras hacer!</div>
+    <textarea class="writing-area" id="freeWrite" rows="5" placeholder="Ejemplo: I will visit my family next weekend.&#10;I won't watch TV tomorrow.&#10;Will you study with me?"></textarea>
+    <div class="char-count" id="cc">0 caracteres</div>
+    <button class="check-btn" style="background:#9B59B6;margin-top:4px" onclick="checkFreeWrite()">Revisar mi escritura ✓</button>
+    <div class="feedback" id="fb-free"></div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn-prev" onclick="goTo(4)">← Anterior</button>
+    <button class="btn-next" onclick="goTo(6)">Siguiente: Repaso Final <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECCIÓN 6: REPASO -->
+<section class="section" id="sec6">
+  <div class="section-tag tag-teal">🏁 Repaso Final</div>
+  <h2 class="section-title">¡Último repaso antes de la tarea!</h2>
+  <p class="section-sub">Selecciona la respuesta correcta para cada pregunta. Este mini-test te ayudará a confirmar lo que aprendiste hoy.</p>
+
+  <div class="question-block">
+    <div class="q-num">Repaso 1 de 5</div>
+    <div class="q-text">¿Cuál es la estructura correcta para el futuro con WILL?</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'A','B','rev1')"><span class="opt-letter">A</span>Verbo + will + sujeto</button>
+      <button class="opt" onclick="checkOpt(this,'B','B','rev1')"><span class="opt-letter">B</span>Sujeto + will + verbo base</button>
+      <button class="opt" onclick="checkOpt(this,'C','B','rev1')"><span class="opt-letter">C</span>Sujeto + verbo + will</button>
+      <button class="opt" onclick="checkOpt(this,'D','B','rev1')"><span class="opt-letter">D</span>Will + verbo en pasado</button>
+    </div>
+    <div class="feedback" id="fb-rev1"></div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-num">Repaso 2 de 5</div>
+    <div class="q-text">¿Cómo se dice "Yo no comeré mañana" en inglés?</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'A','C','rev2')"><span class="opt-letter">A</span>I will eat tomorrow.</button>
+      <button class="opt" onclick="checkOpt(this,'B','C','rev2')"><span class="opt-letter">B</span>I not will eat tomorrow.</button>
+      <button class="opt" onclick="checkOpt(this,'C','C','rev2')"><span class="opt-letter">C</span>I won't eat tomorrow.</button>
+      <button class="opt" onclick="checkOpt(this,'D','C','rev2')"><span class="opt-letter">D</span>I will not eating tomorrow.</button>
+    </div>
+    <div class="feedback" id="fb-rev2"></div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-num">Repaso 3 de 5</div>
+    <div class="q-text">Elige la pregunta correcta en inglés para "¿Él irá al gimnasio?"</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'A','A','rev3')"><span class="opt-letter">A</span>Will he go to the gym?</button>
+      <button class="opt" onclick="checkOpt(this,'B','A','rev3')"><span class="opt-letter">B</span>He will go to the gym?</button>
+      <button class="opt" onclick="checkOpt(this,'C','A','rev3')"><span class="opt-letter">C</span>Does he will go to the gym?</button>
+      <button class="opt" onclick="checkOpt(this,'D','A','rev3')"><span class="opt-letter">D</span>He goes to the gym will?</button>
+    </div>
+    <div class="feedback" id="fb-rev3"></div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-num">Repaso 4 de 5</div>
+    <div class="q-text">¿Qué significa "won't" en español?</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'A','D','rev4')"><span class="opt-letter">A</span>Voy a</button>
+      <button class="opt" onclick="checkOpt(this,'B','D','rev4')"><span class="opt-letter">B</span>Quiero</button>
+      <button class="opt" onclick="checkOpt(this,'C','D','rev4')"><span class="opt-letter">C</span>Puedo</button>
+      <button class="opt" onclick="checkOpt(this,'D','D','rev4')"><span class="opt-letter">D</span>No voy a / No lo haré</button>
+    </div>
+    <div class="feedback" id="fb-rev4"></div>
+  </div>
+
+  <div class="question-block">
+    <div class="q-num">Repaso 5 de 5</div>
+    <div class="q-text">Escucha este audio y selecciona lo que escuchas: <button class="play-btn" style="display:inline-flex;margin-left:8px;background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark)" onclick="speak('They will travel to Paris next summer.')">▶ Escuchar</button></div>
+    <div class="options" style="margin-top:12px">
+      <button class="opt" onclick="checkOpt(this,'A','B','rev5')"><span class="opt-letter">A</span>They will travel to Rome next winter.</button>
+      <button class="opt" onclick="checkOpt(this,'B','B','rev5')"><span class="opt-letter">B</span>They will travel to Paris next summer.</button>
+      <button class="opt" onclick="checkOpt(this,'C','B','rev5')"><span class="opt-letter">C</span>They won't travel to Paris this summer.</button>
+      <button class="opt" onclick="checkOpt(this,'D','B','rev5')"><span class="opt-letter">D</span>She will travel to Paris next summer.</button>
+    </div>
+    <div class="feedback" id="fb-rev5"></div>
+  </div>
+
+  <div id="congratsMsg" style="display:none" class="completed-badge">
+    <span class="big-emoji">🎉</span>
+    <span class="stars">⭐⭐⭐</span>
+    <h2>¡Clase completada!</h2>
+    <p>¡Excelente trabajo! Has aprendido a usar WILL en inglés americano. Ya puedes hablar sobre el futuro. ¡Ahora ve a hacer tu tarea para seguir practicando en casa!</p>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn-prev" onclick="goTo(5)">← Anterior</button>
+    <button class="btn-next" style="background:var(--orange);border-color:var(--orange);color:#fff" onclick="goTo(7)">Ver mi Tarea 🏠 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ SECCIÓN 7: TAREA -->
+<section class="section" id="sec7">
+  <div style="text-align:center;margin-bottom:28px">
+    <div class="section-tag tag-orange" style="display:inline-flex">🏠 Tarea para la Casa</div>
+    <h2 class="section-title" style="text-align:center">¡Sigue practicando en casa!</h2>
+    <p class="section-sub" style="text-align:center">Tómate 20-30 minutos para hacer estos ejercicios. Tienes todo lo que necesitas aquí. ¡Sin buscar nada extra!</p>
+  </div>
+
+  <!-- TAREA LISTENING -->
+  <div class="tarea-card">
+    <div class="tarea-badge">🎧 Tarea 1 — Listening</div>
+    <h3>Escucha una nueva conversación</h3>
+    <p>Escucha este diálogo sobre planes futuros. Luego responde las preguntas de comprensión.</p>
+    <div class="tarea-inner">
+      <div class="audio-player" style="margin:0 0 16px" onclick="playHomeworkAudio()">
+        <div class="audio-btn" id="hwBtn">▶</div>
+        <div class="audio-info">
+          <div class="audio-title">🎙️ "Career Plans" (Planes de carrera)</div>
+          <div class="audio-sub">Conversación en inglés americano · ~30 segundos</div>
         </div>
-        <div class="script-box" id="hwSc">
-          <strong style="color:var(--purple);font-family:'Outfit'">📄 Transcripción:</strong><br><br>
-          "Hi! I'm Daniel. I want to talk about my future plans. Next summer, I <em>will finish</em> school and start a new adventure. I <em>will move</em> to Canada to learn English. I <em>will live</em> with a host family and study at a language school. I <em>won't be</em> alone because my cousin <em>will come</em> with me. We <em>will explore</em> the city together and make new friends. I <em>will work</em> part-time in a coffee shop. I <em>won't miss</em> my family too much because I <em>will call</em> them every day. I think this experience <em>will change</em> my life. I <em>will come</em> back home in one year, but I <em>will be</em> a completely different person!"
+        <div class="audio-wave paused" id="hwWave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+
+      <div class="card card-accent" style="background:rgba(255,255,255,0.05);border-color:rgba(0,229,200,0.3);margin-bottom:16px">
+        <div style="font-size:12px;font-weight:800;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">📜 Transcripción</div>
+        <div style="font-size:14px;line-height:2;color:rgba(255,255,255,0.9)">
+          <strong style="color:var(--teal)">Lisa:</strong> <em>"Hi Tom! Will you go to college next year?"</em><br>
+          <strong style="color:var(--orange)">Tom:</strong> <em>"Yes! I'll study computer science. What about you?"</em><br>
+          <strong style="color:var(--teal)">Lisa:</strong> <em>"I won't go to college. I will start my own business."</em><br>
+          <strong style="color:var(--orange)">Tom:</strong> <em>"Wow, that's brave! Will you need any help?"</em><br>
+          <strong style="color:var(--teal)">Lisa:</strong> <em>"Maybe. My parents will support me. It won't be easy, but I'll work hard!"</em>
         </div>
       </div>
-      <div class="qlist" id="hwListenQs"></div>
-    </div>
 
-    <!-- HW READING -->
-    <div class="hw-block">
-      <div class="hw-subtitle">📖 Tarea 2 — Reading (Comprensión Lectora)</div>
-      <p style="color:var(--dim);font-size:.92rem;margin-bottom:13px">Lee el texto y responde las preguntas. Haz click en las palabras en color para escucharlas.</p>
-      <div class="rbox">
-        <div class="reading-legend">
-          <div class="legend-item"><div class="legend-dot af"></div>WILL (afirmativo)</div>
-          <div class="legend-item"><div class="legend-dot neg"></div>WON'T (negativo)</div>
-          <div class="legend-item"><div class="legend-dot wv"></div>verbo principal</div>
+      <div class="question-block" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);margin-bottom:10px">
+        <div class="q-num" style="color:var(--teal)">Pregunta 1</div>
+        <div class="q-text" style="color:#fff">¿Qué estudiará Tom en la universidad?</div>
+        <div class="options">
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'A','A','hw1')"><span class="opt-letter">A</span>Ciencias de la computación</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'B','A','hw1')"><span class="opt-letter">B</span>Medicina</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'C','A','hw1')"><span class="opt-letter">C</span>Inglés</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'D','A','hw1')"><span class="opt-letter">D</span>Arte</button>
         </div>
-        <button class="audio-sent-btn" onclick="speakFull('Carlos is a young man with great ambitions. In five years, he will be a professional football player. He will train every day and eat very healthy food. He will not drink alcohol or smoke. His team will win many championships. Carlos will also help his community. He will build a sports center for young people in his neighborhood. He will give free training lessons to kids who don\'t have money. In the future, Carlos will become famous but he won\'t change. He will always remember where he comes from and will help people who need it.')">🔊 Escuchar texto completo</button>
-        <p>
-          Carlos is a young man with great ambitions. In five years, he <span class="v will" onclick="speak('will be')">will</span> <span class="v" onclick="speak('be a professional football player')">be</span> a professional football player. He <span class="v will" onclick="speak('will train')">will</span> <span class="v" onclick="speak('train every day')">train</span> every day and <span class="v" onclick="speak('eat very healthy food')">eat</span> very healthy food. He <span class="v wont" onclick="speak('won\'t drink')">won't</span> <span class="v" onclick="speak('drink alcohol')">drink</span> alcohol or smoke. His team <span class="v will" onclick="speak('will win')">will</span> <span class="v" onclick="speak('win many championships')">win</span> many championships. Carlos <span class="v will" onclick="speak('will also help')">will</span> also <span class="v" onclick="speak('help his community')">help</span> his community. He <span class="v will" onclick="speak('will build')">will</span> <span class="v" onclick="speak('build a sports center')">build</span> a sports center for young people in his neighborhood. He <span class="v will" onclick="speak('will give')">will</span> <span class="v" onclick="speak('give free training lessons')">give</span> free training lessons to kids who don't have money. In the future, Carlos <span class="v will" onclick="speak('will become famous')">will</span> <span class="v" onclick="speak('become famous')">become</span> famous but he <span class="v wont" onclick="speak('won\'t change')">won't</span> <span class="v" onclick="speak('change')">change</span>. He <span class="v will" onclick="speak('will always remember')">will</span> always <span class="v" onclick="speak('remember where he comes from')">remember</span> where he comes from and <span class="v will" onclick="speak('will help people')">will</span> <span class="v" onclick="speak('help people who need it')">help</span> people who need it.
-        </p>
+        <div class="feedback" id="fb-hw1"></div>
       </div>
-      <div class="qlist" id="hwReadQs"></div>
-    </div>
 
-    <!-- HW WRITING -->
-    <div class="hw-block">
-      <div class="hw-subtitle">✍️ Tarea 3 — Writing (Traducción al inglés)</div>
-      <p style="color:var(--dim);font-size:.92rem;margin-bottom:13px">Traduce las oraciones al inglés usando WILL o WON'T. Escribe tu respuesta y presiona Verificar.</p>
-      <div class="trans-list" id="transList"></div>
-      <br>
-      <button class="btn-check" onclick="checkTrans()">✅ Verificar traducciones</button>
-      <div class="score-box" id="transScore"></div>
+      <div class="question-block" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);margin-bottom:10px">
+        <div class="q-num" style="color:var(--teal)">Pregunta 2</div>
+        <div class="q-text" style="color:#fff">¿Qué hará Lisa en lugar de ir a la universidad?</div>
+        <div class="options">
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'A','C','hw2')"><span class="opt-letter">A</span>Viajará al extranjero</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'B','C','hw2')"><span class="opt-letter">B</span>Buscará trabajo en una empresa</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'C','C','hw2')"><span class="opt-letter">C</span>Iniciará su propio negocio</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'D','C','hw2')"><span class="opt-letter">D</span>Se mudará a otra ciudad</button>
+        </div>
+        <div class="feedback" id="fb-hw2"></div>
+      </div>
+
+      <div class="question-block" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)">
+        <div class="q-num" style="color:var(--teal)">Pregunta 3</div>
+        <div class="q-text" style="color:#fff">¿Quiénes apoyarán a Lisa?</div>
+        <div class="options">
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'A','B','hw3')"><span class="opt-letter">A</span>Sus profesores</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'B','B','hw3')"><span class="opt-letter">B</span>Sus padres</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'C','B','hw3')"><span class="opt-letter">C</span>Su jefe</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'D','B','hw3')"><span class="opt-letter">D</span>Tom</button>
+        </div>
+        <div class="feedback" id="fb-hw3"></div>
+      </div>
     </div>
   </div>
 
-  <!-- CONGRATS -->
-  <div class="wcard" style="margin-top:34px">
-    <span class="wemoji">🏆</span>
-    <h1 style="font-size:2rem">¡Clase completada!</h1>
-    <p class="lead">Aprendiste el Futuro con WILL — ahora puedes hablar sobre tus sueños, planes y predicciones en inglés. <strong style="color:var(--purple-l)">¡Eso es un logro enorme!</strong></p>
-    <div class="chips">
-      <span class="chip">🌟 ¡Excelente esfuerzo!</span>
-      <span class="chip">🚀 ¡Tus sueños en inglés!</span>
-      <span class="chip">💜 ¡Sigue adelante!</span>
+  <!-- TAREA READING -->
+  <div class="tarea-card" style="background:linear-gradient(135deg,#1A1A2E,#16213E)">
+    <div class="tarea-badge" style="background:var(--teal);color:#0A2A26">📖 Tarea 2 — Reading</div>
+    <h3>Lee este nuevo texto</h3>
+    <p>Lee el siguiente texto sobre planes de viaje. Luego responde las preguntas.</p>
+    <div class="tarea-inner">
+      <div class="audio-player" style="background:rgba(0,229,200,0.1);border:1.5px solid rgba(0,229,200,0.3);margin-bottom:16px" onclick="playHomeReadingAudio()">
+        <div class="audio-btn" id="hrBtn">▶</div>
+        <div class="audio-info">
+          <div class="audio-title">🔊 Escuchar el texto en voz alta</div>
+          <div class="audio-sub">Inglés americano · lectura completa</div>
+        </div>
+        <div class="audio-wave paused" id="hrWave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+
+      <div class="reading-text" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:rgba(255,255,255,0.9)">
+        <div style="font-size:12px;font-weight:800;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">📝 A Trip to New York · Un viaje a Nueva York</div>
+        <p style="margin-bottom:12px">My name is Carlos. Next month, I <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="viajaré">will travel</span> to New York City for the first time. I <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="voy a quedarme">will stay</span> at a hotel near Central Park.</p>
+        <p style="margin-bottom:12px">I <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="visitaré">will visit</span> the Statue of Liberty on the first day. My cousin Elena <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="vendrá / irá">will come</span> with me. She <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="tomará">will take</span> many photos.</p>
+        <p style="margin-bottom:12px">We <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="no comeremos">won't eat</span> at fancy restaurants every day because it <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="será / va a ser">will be</span> very expensive. Instead, we <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="probaremos">will try</span> street food.</p>
+        <p>This trip <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="será">will be</span> amazing. I <span class="tooltip highlight" style="background:rgba(0,229,200,0.2);border-bottom-color:var(--teal)" data-tip="nunca olvidaré">will never forget</span> it! 🗽</p>
+      </div>
+
+      <div class="question-block" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);margin-top:16px;margin-bottom:10px">
+        <div class="q-num" style="color:var(--teal)">Pregunta 1</div>
+        <div class="q-text" style="color:#fff">¿Dónde se quedará Carlos en Nueva York?</div>
+        <div class="options">
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'A','B','hr1')"><span class="opt-letter">A</span>En casa de su prima</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'B','B','hr1')"><span class="opt-letter">B</span>En un hotel cerca de Central Park</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'C','B','hr1')"><span class="opt-letter">C</span>En un apartamento alquilado</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'D','B','hr1')"><span class="opt-letter">D</span>En un hostal</button>
+        </div>
+        <div class="feedback" id="fb-hr1"></div>
+      </div>
+
+      <div class="question-block" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);margin-bottom:10px">
+        <div class="q-num" style="color:var(--teal)">Pregunta 2</div>
+        <div class="q-text" style="color:#fff">¿Qué hará Elena durante el viaje?</div>
+        <div class="options">
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'A','D','hr2')"><span class="opt-letter">A</span>Comprará ropa cara</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'B','D','hr2')"><span class="opt-letter">B</span>Manejará el auto</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'C','D','hr2')"><span class="opt-letter">C</span>Preparará la comida</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'D','D','hr2')"><span class="opt-letter">D</span>Tomará muchas fotos</button>
+        </div>
+        <div class="feedback" id="fb-hr2"></div>
+      </div>
+
+      <div class="question-block" style="background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)">
+        <div class="q-num" style="color:var(--teal)">Pregunta 3</div>
+        <div class="q-text" style="color:#fff">¿Por qué Carlos y Elena no comerán en restaurantes caros todos los días?</div>
+        <div class="options">
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'A','A','hr3')"><span class="opt-letter">A</span>Porque será muy caro</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'B','A','hr3')"><span class="opt-letter">B</span>Porque no les gusta la comida</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'C','A','hr3')"><span class="opt-letter">C</span>Porque no habrá restaurantes cerca</button>
+          <button class="opt" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" onclick="checkOpt(this,'D','A','hr3')"><span class="opt-letter">D</span>Porque prefieren cocinar</button>
+        </div>
+        <div class="feedback" id="fb-hr3"></div>
+      </div>
     </div>
   </div>
-</div>
 
-</main>
+  <!-- TAREA WRITING -->
+  <div class="tarea-card" style="background:linear-gradient(135deg,#1E0A2E,#2E1A3E)">
+    <div class="tarea-badge" style="background:#9B59B6;color:#fff">✏️ Tarea 3 — Writing</div>
+    <h3>Practica escribiendo</h3>
+    <p>Completa los ejercicios de escritura. ¡Escucha el audio para verificar tus respuestas!</p>
+    <div class="tarea-inner">
+      <div style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:16px">Parte A — Completa con WILL + el verbo correcto:</div>
 
-<footer class="footer">
-  <strong>Clase de Inglés — Futuro con WILL</strong> · Nivel Principiante<br>
-  "El futuro pertenece a quienes creen en la belleza de sus sueños." 🌟
-</footer>
+      <div style="margin-bottom:16px">
+        <div class="writing-prompt" style="color:rgba(255,255,255,0.7)">1. My brother _______ (clean) his room on Sunday.</div>
+        <input type="text" class="writing-area" style="min-height:44px;height:44px;font-size:16px;background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);color:#fff" id="hw_w1" placeholder="Escribe tu respuesta...">
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+          <button class="check-btn" onclick="checkFill('hw_w1',['will clean','my brother will clean'],1,'hw')">Verificar ✓</button>
+          <button class="play-btn" style="background:rgba(0,229,200,0.2);border-color:var(--teal);color:var(--teal)" onclick="speak('My brother will clean his room on Sunday.')">▶ Audio</button>
+        </div>
+        <div class="feedback" id="fb-hw_w1"></div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <div class="writing-prompt" style="color:rgba(255,255,255,0.7)">2. We _______ (not / watch) that movie. It's boring.</div>
+        <input type="text" class="writing-area" style="min-height:44px;height:44px;font-size:16px;background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);color:#fff" id="hw_w2" placeholder="Escribe tu respuesta...">
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+          <button class="check-btn" onclick="checkFill('hw_w2',['will not watch','won\'t watch','we will not watch','we won\'t watch'],2,'hw')">Verificar ✓</button>
+          <button class="play-btn" style="background:rgba(0,229,200,0.2);border-color:var(--teal);color:var(--teal)" onclick="speak('We won\'t watch that movie. It\'s boring.')">▶ Audio</button>
+        </div>
+        <div class="feedback" id="fb-hw_w2"></div>
+      </div>
+
+      <div style="margin-bottom:20px">
+        <div class="writing-prompt" style="color:rgba(255,255,255,0.7)">3. _______ (Will / she / call) you tonight?</div>
+        <input type="text" class="writing-area" style="min-height:44px;height:44px;font-size:16px;background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);color:#fff" id="hw_w3" placeholder="Escribe tu respuesta...">
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+          <button class="check-btn" onclick="checkFill('hw_w3',['will she call','will she call you'],3,'hw')">Verificar ✓</button>
+          <button class="play-btn" style="background:rgba(0,229,200,0.2);border-color:var(--teal);color:var(--teal)" onclick="speak('Will she call you tonight?')">▶ Audio</button>
+        </div>
+        <div class="feedback" id="fb-hw_w3"></div>
+      </div>
+
+      <div style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:12px">Parte B — Escribe 3 oraciones sobre tu futuro usando WILL:</div>
+      <textarea class="writing-area" id="hwFreeWrite" rows="5" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);color:#fff" placeholder="Ejemplo: Next year, I will learn to drive.&#10;I won't stay home all day tomorrow.&#10;Will my friend visit me this month?"></textarea>
+      <div class="char-count" id="hwcc" style="color:rgba(255,255,255,0.4)">0 caracteres</div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+        <button class="check-btn" style="background:#9B59B6" onclick="checkHwFree()">Revisar mi escritura ✓</button>
+        <button class="play-btn" style="background:rgba(155,89,182,0.3);border-color:#9B59B6;color:#CE93E9" onclick="readFreeWrite()">▶ Escuchar mi texto</button>
+      </div>
+      <div class="feedback" id="fb-hwfree"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:32px 20px;background:linear-gradient(135deg,var(--teal-light),var(--orange-light));border-radius:var(--radius);margin-top:8px">
+    <div style="font-size:52px;margin-bottom:12px">🏆</div>
+    <h3 style="font-size:22px;font-weight:900;color:var(--text);margin-bottom:8px">¡Tarea completada!</h3>
+    <p style="font-size:15px;color:var(--text2);line-height:1.6;max-width:440px;margin:0 auto">¡Genial! Has terminado toda la clase y la tarea. Recuerda: <strong>la práctica diaria es la clave</strong> para aprender inglés. ¡Sigue adelante! 💪</p>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="btn-prev" onclick="goTo(6)">← Volver al Repaso</button>
+    <button class="btn-next" onclick="goTo(0)">🔄 Reiniciar clase</button>
+  </div>
+</section>
 
 <script>
-// ════════════ SPEECH ════════════
-let voices=[];
-if('speechSynthesis' in window){
-  function lv(){voices=window.speechSynthesis.getVoices();}
-  lv();window.speechSynthesis.onvoiceschanged=lv;
-}
-function getVoice(){
-  const p=['Samantha','Alex','Google US English','Microsoft Zira','Karen'];
-  for(const n of p){const v=voices.find(v=>v.name.includes(n));if(v)return v;}
-  return voices.find(v=>v.lang==='en-US')||voices.find(v=>v.lang.startsWith('en'))||null;
-}
-function speak(text,rate=0.82){
-  if(!('speechSynthesis' in window))return;
-  window.speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang='en-US';u.rate=rate;u.pitch=1;
-  const v=getVoice();if(v)u.voice=v;
-  window.speechSynthesis.speak(u);
-}
-function speakFull(t){speak(t,0.78);}
+var currentSection = 0;
+var totalSections = 8;
+var synth = window.speechSynthesis;
+var voices = [];
+var audioStates = {};
 
-const scripts={
-  class:"Hi! My name is Sophie. I have big plans for the future! Next year, I will travel to Japan. I will visit Tokyo and see the famous temples. I will also study Japanese before I go. My friend Tom will come with me. We will eat delicious sushi and ramen every day! I will take many photos and share them with my family. I won't forget to buy souvenirs for everyone. I think it will be the best trip of my life! I am so excited. What will you do in the future?",
-  hw:"Hi! I'm Daniel. I want to talk about my future plans. Next summer, I will finish school and start a new adventure. I will move to Canada to learn English. I will live with a host family and study at a language school. I won't be alone because my cousin will come with me. We will explore the city together and make new friends. I will work part-time in a coffee shop. I won't miss my family too much because I will call them every day. I think this experience will change my life. I will come back home in one year, but I will be a completely different person!"
-};
-
-let curBtn=null;
-function playAudio(k){
-  const id=k==='class'?'playBtn1':'hwPlayBtn';
-  const btn=document.getElementById(id);
-  if(curBtn&&curBtn!==btn)curBtn.classList.remove('playing');
-  curBtn=btn;btn.classList.add('playing');
-  speak(scripts[k],0.78);
-  const words=scripts[k].split(' ').length;
-  setTimeout(()=>btn.classList.remove('playing'),Math.ceil((words/2.2)*1000));
+function loadVoices(){
+  voices = synth.getVoices();
 }
-function toggleScript(id,btn){
-  const el=document.getElementById(id);
-  if(el.classList.contains('show')){el.classList.remove('show');btn.textContent='👁 Ver transcripción';}
-  else{el.classList.add('show');btn.textContent='👁 Ocultar transcripción';}
+loadVoices();
+if(speechSynthesis.onvoiceschanged !== undefined){
+  speechSynthesis.onvoiceschanged = loadVoices;
 }
 
-// ════════════ TIMER ════════════
-let elapsed=0,total=2400;
-setInterval(()=>{
-  elapsed++;const r=total-elapsed;
-  if(r<=0){document.getElementById('timerDisplay').textContent='⏱ ¡Tiempo!';return;}
-  const m=String(Math.floor(r/60)).padStart(2,'0');
-  const s=String(r%60).padStart(2,'0');
-  document.getElementById('timerDisplay').textContent=`⏱ ${m}:${s}`;
-  document.getElementById('progFill').style.width=((elapsed/total)*100)+'%';
-},1000);
-
-// ════════════ USES ════════════
-const uses=[
-  {icon:'🔮',title:'Predicciones',desc:'Creemos que algo pasará en el futuro.',ex:'It will snow next week.'},
-  {icon:'📅',title:'Planes / Decisiones',desc:'Hablamos de lo que pensamos hacer.',ex:'I will study abroad next year.'},
-  {icon:'🤝',title:'Promesas',desc:'Prometemos hacer algo.',ex:'I will call you tonight, I promise!'},
-  {icon:'🙋',title:'Ofrecimientos',desc:'Ofrecemos ayuda espontáneamente.',ex:'I will help you with that!'},
-  {icon:'⚡',title:'Decisiones Espontáneas',desc:'Decidimos en el momento de hablar.',ex:"I'll have the pasta, please."},
-];
-function buildUses(){
-  const c=document.getElementById('usesGrid');
-  uses.forEach(u=>{
-    const d=document.createElement('div');d.className='use-card';
-    d.innerHTML=`<span class="use-icon">${u.icon}</span><div class="use-title">${u.title}</div><div class="use-desc">${u.desc}</div><div class="use-ex" onclick="speak('${u.ex.replace(/'/g,"\\'")}')">🔊 "${u.ex}"</div>`;
-    c.appendChild(d);
-  });
+function speak(text){
+  if(!synth) return;
+  synth.cancel();
+  var utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US';
+  utt.rate = 0.88;
+  utt.pitch = 1.05;
+  var v = voices.find(function(v){ return v.lang==='en-US' && v.name.toLowerCase().indexOf('google')>-1; }) ||
+           voices.find(function(v){ return v.lang==='en-US'; }) ||
+           voices.find(function(v){ return v.lang.startsWith('en'); });
+  if(v) utt.voice = v;
+  synth.speak(utt);
 }
 
-// ════════════ TIME MARKERS ════════════
-const timeMarkers=[
-  {en:'Tomorrow',es:'Mañana'},{en:'Next week',es:'La próxima semana'},
-  {en:'Next month',es:'El próximo mes'},{en:'Next year',es:'El próximo año'},
-  {en:'Soon',es:'Pronto'},{en:'Later',es:'Más tarde'},
-  {en:'In the future',es:'En el futuro'},{en:'One day',es:'Algún día'},
-  {en:'In two years',es:'En dos años'},{en:'Tonight',es:'Esta noche'},
-];
-function buildTimeGrid(){
-  const tg=document.getElementById('timeGrid');
-  timeMarkers.forEach(t=>{
-    const d=document.createElement('div');d.className='tcard';
-    d.innerHTML=`<div class="tc-en">${t.en}</div><div class="tc-es">${t.es}</div>`;
-    d.onclick=()=>speak(t.en);tg.appendChild(d);
-  });
+function playAudio(id, waveId, text){
+  var btn = document.getElementById(id);
+  var wave = document.getElementById(waveId);
+  if(!btn || !wave) return;
+  if(audioStates[id]){
+    synth.cancel();
+    btn.textContent='▶';
+    wave.classList.add('paused');
+    audioStates[id]=false;
+    return;
+  }
+  audioStates[id]=true;
+  btn.textContent='⏸';
+  wave.classList.remove('paused');
+  var utt = new SpeechSynthesisUtterance(text);
+  utt.lang='en-US'; utt.rate=0.85; utt.pitch=1.0;
+  var v = voices.find(function(v){ return v.lang==='en-US'&&v.name.toLowerCase().indexOf('google')>-1; })||
+           voices.find(function(v){ return v.lang==='en-US'; })||
+           voices.find(function(v){ return v.lang.startsWith('en'); });
+  if(v) utt.voice=v;
+  utt.onend=function(){ btn.textContent='▶'; wave.classList.add('paused'); audioStates[id]=false; };
+  utt.onerror=function(){ btn.textContent='▶'; wave.classList.add('paused'); audioStates[id]=false; };
+  synth.speak(utt);
 }
 
-// ════════════ CONTRACTIONS ════════════
-const contractions=[
-  {full:'I will',short:"I'll",audio:"I'll"},
-  {full:'You will',short:"You'll",audio:"You'll"},
-  {full:'He will',short:"He'll",audio:"He'll"},
-  {full:'She will',short:"She'll",audio:"She'll"},
-  {full:'It will',short:"It'll",audio:"It'll"},
-  {full:'We will',short:"We'll",audio:"We'll"},
-  {full:'They will',short:"They'll",audio:"They'll"},
-  {full:'Will not',short:"Won't",audio:"Won't",special:true},
-];
-function buildContractions(){
-  const cg=document.getElementById('contGrid');
-  contractions.forEach(c=>{
-    const d=document.createElement('div');d.className='cont-card';
-    d.innerHTML=`
-      <div class="cont-full">${c.full}</div>
-      <div class="cont-arrow">→</div>
-      <div class="cont-short" style="${c.special?'color:#ff6680':''}">${c.short}</div>
-      <div class="cont-hint">🔊 click para escuchar</div>`;
-    d.onclick=()=>speak(c.audio);cg.appendChild(d);
-  });
+var listeningText = "Hey, what will you do this weekend? I'll probably stay home. Maybe I'll watch movies. What about you? I will visit my grandmother on Saturday. And on Sunday, I'll go to the park with my dog. That sounds great! I think it will be sunny this weekend. Yes! It won't rain. See you on Monday!";
+var readingText = "My Plans for Next Year. My name is Sam. I have many plans for next year. First, I will study English every day. I think it will be difficult, but I won't give up. Also, I will look for a new job. My friend Sarah will help me with my resume. She will review it and give me advice. In the summer, my family will travel to the beach. We will stay there for one week. It will be so much fun! I'm very excited. Next year will be amazing for me. I won't forget my goals. I'll do it!";
+var hwText = "Hi Tom! Will you go to college next year? Yes! I'll study computer science. What about you? I won't go to college. I will start my own business. Wow, that's brave! Will you need any help? Maybe. My parents will support me. It won't be easy, but I'll work hard!";
+var hrText = "A Trip to New York. My name is Carlos. Next month, I will travel to New York City for the first time. I will stay at a hotel near Central Park. I will visit the Statue of Liberty on the first day. My cousin Elena will come with me. She will take many photos. We won't eat at fancy restaurants every day because it will be very expensive. Instead, we will try street food. This trip will be amazing. I will never forget it!";
+
+function playListeningAudio(){ playAudio('apBtn','apWave', listeningText); }
+function playReadingAudio(){ playAudio('readBtn','readWave', readingText); }
+function playHomeworkAudio(){ playAudio('hwBtn','hwWave', hwText); }
+function playHomeReadingAudio(){ playAudio('hrBtn','hrWave', hrText); }
+
+function readFreeWrite(){
+  var txt = document.getElementById('hwFreeWrite').value.trim();
+  if(txt.length>5) speak(txt);
+  else speak('Please write your sentences first.');
 }
 
-// ════════════ SHORT ANSWERS ════════════
-const saData=[
-  {q:'Will you go to the party?',yes:"Yes, I will.",no:"No, I won't."},
-  {q:'Will she study tomorrow?',yes:"Yes, she will.",no:"No, she won't."},
-  {q:'Will they come?',yes:"Yes, they will.",no:"No, they won't."},
-  {q:'Will it rain tonight?',yes:"Yes, it will.",no:"No, it won't."},
-];
-function buildShortAnswers(){
-  const sg=document.getElementById('saGrid');
-  saData.forEach(sa=>{
-    const d=document.createElement('div');d.className='sa-card';
-    d.innerHTML=`
-      <div class="sa-q">🔊 <span onclick="speak('${sa.q}')" style="cursor:pointer;color:var(--gold)">"${sa.q}"</span></div>
-      <span class="sa-yes" onclick="speak('${sa.yes}')">${sa.yes}</span>
-      <span class="sa-no" onclick="speak('${sa.no}')">${sa.no}</span>`;
-    sg.appendChild(d);
-  });
+function goTo(n){
+  document.querySelectorAll('.section').forEach(function(s,i){ s.classList.toggle('active',i===n); });
+  document.querySelectorAll('.nav-btn').forEach(function(b,i){ b.classList.toggle('active',i===n); });
+  currentSection=n;
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// ════════════ QUESTIONS ════════════
-function buildQs(data,id){
-  const c=document.getElementById(id);
-  data.forEach((q,qi)=>{
-    const d=document.createElement('div');d.className='qcard';
-    d.innerHTML=`
-      <div class="qtext"><span class="qnum">${qi+1}.</span> ${q.q}</div>
-      <div class="opts" id="opts_${id}_${qi}">
-        ${q.opts.map((o,oi)=>`<button class="opt" onclick="chkOpt(this,${qi},${oi},'${id}',${q.c})">${o}</button>`).join('')}
-      </div>
-      <div class="qfb" id="fb_${id}_${qi}"></div>`;
-    c.appendChild(d);
-  });
-}
-function chkOpt(btn,qi,oi,cid,c){
-  const opts=document.querySelectorAll(`#opts_${cid}_${qi} .opt`);
-  if([...opts].some(o=>o.classList.contains('done')))return;
-  opts.forEach(o=>o.classList.add('done'));
-  const fb=document.getElementById(`fb_${cid}_${qi}`);
-  if(oi===c){btn.classList.add('correct');fb.textContent='✅ ¡Correcto! ¡Excelente!';fb.className='qfb show ok';}
-  else{btn.classList.add('wrong');opts[c].classList.add('correct');fb.textContent='❌ No es correcta. La respuesta correcta está en verde.';fb.className='qfb show fail';}
+function updateProgress(){
+  var pct = Math.round((currentSection/(totalSections-1))*100);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progPct').textContent = pct+'%';
 }
 
-// ════════════ QUESTION DATA ════════════
-const listenQData=[
-  {q:'¿A dónde viajará Sophie el próximo año?',opts:['A Francia (France)','A Japón (Japan)','A China (China)','A Corea (Korea)'],c:1},
-  {q:'¿Qué estudiará Sophie antes de su viaje?',opts:['Inglés (English)','Chino (Chinese)','Japonés (Japanese)','Francés (French)'],c:2},
-  {q:'¿Quién acompañará a Sophie en su viaje?',opts:['Su hermano (her brother)','Su novio (her boyfriend)','Su primo (her cousin)','Su amigo Tom (her friend Tom)'],c:3},
-  {q:'¿Qué comida comerán todos los días?',opts:['Pizza y pasta','Tacos y burritos','Sushi y ramen','Hamburguesas y papas'],c:2},
-  {q:'¿Qué dice Sophie que no olvidará hacer?',opts:['Llamar a sus padres','Comprar recuerdos (souvenirs)','Tomar fotos','Estudiar japonés'],c:1},
-];
-const readQData=[
-  {q:'¿Qué hará Maria el próximo mes?',opts:['Conseguirá un trabajo','Se casará','Terminará sus estudios universitarios','Comprará un apartamento'],c:2},
-  {q:'¿Qué comprará Maria en dos años?',opts:['Un carro nuevo','Un apartamento propio','Una tienda','Un negocio'],c:1},
-  {q:'¿Dónde vivirán Maria y su novio en el futuro?',opts:['En la ciudad','En el extranjero','En el campo (countryside)','En la playa'],c:2},
-  {q:'¿Cuántos hijos tendrán Maria y su novio?',opts:['Uno','Dos','Tres','Cuatro'],c:1},
-  {q:'¿Qué cree Maria que es posible si trabajas duro?',opts:['Hacerse famosa','Ganar mucho dinero','Todo será posible','Nunca aburrirse'],c:2},
-];
-
-// ════════════ WRITING ════════════
-const wbWords=['will travel','will study','won\'t forget','will work','will visit','will be','will help','won\'t eat','will buy','will call'];
-const fillData=[
-  {blank:"will travel",pre:"Next year, I",post:"to New York.",hint:'Pista: viajar en el futuro',audio:"Next year I will travel to New York."},
-  {blank:"will study",pre:"She",post:"medicine at university.",hint:'Pista: estudiar en el futuro',audio:"She will study medicine at university."},
-  {blank:"won't forget",pre:"I",post:"my phone tonight, I promise!",hint:'Pista: NO olvidar',audio:"I won't forget my phone tonight, I promise!"},
-  {blank:"will work",pre:"He",post:"very hard to save money.",hint:'Pista: trabajar en el futuro',audio:"He will work very hard to save money."},
-  {blank:"will visit",pre:"We",post:"our grandparents this weekend.",hint:'Pista: visitar en el futuro',audio:"We will visit our grandparents this weekend."},
-  {blank:"will be",pre:"It",post:"very cold tomorrow.",hint:'Pista: estar/ser en el futuro',audio:"It will be very cold tomorrow."},
-  {blank:"will help",pre:"I",post:"you with your homework.",hint:'Pista: ayudar en el futuro',audio:"I will help you with your homework."},
-  {blank:"won't eat",pre:"She",post:"meat anymore. She is a vegetarian.",hint:'Pista: NO comer',audio:"She won't eat meat anymore. She is a vegetarian."},
-  {blank:"will buy",pre:"They",post:"a new house next year.",hint:'Pista: comprar en el futuro',audio:"They will buy a new house next year."},
-  {blank:"will call",pre:"He",post:"us when he arrives.",hint:'Pista: llamar en el futuro',audio:"He will call us when he arrives."},
-];
-
-function buildWBank(){
-  const wb=document.getElementById('wbank');
-  wbWords.forEach(w=>{
-    const s=document.createElement('span');s.className='wb-word';s.textContent=w;
-    s.onclick=()=>speak(w);wb.appendChild(s);
-  });
-}
-function buildFill(){
-  const fl=document.getElementById('fillList');
-  fillData.forEach((ex,i)=>{
-    const d=document.createElement('div');d.className='fill-item';
-    d.innerHTML=`
-      <div class="fill-sent">
-        <button class="sbtn" onclick="speak('${ex.audio.replace(/'/g,"\\'")}')">🔊</button>
-        <span>${ex.pre}</span>
-        <input type="text" class="fill-in" id="fi_${i}" placeholder="will / won't..." autocomplete="off" spellcheck="false">
-        <span>${ex.post}</span>
-      </div>
-      <div class="fill-hint" id="fh_${i}">${ex.hint}</div>`;
-    fl.appendChild(d);
-  });
-}
-function checkFill(){
-  let ok=0;
-  fillData.forEach((ex,i)=>{
-    const inp=document.getElementById(`fi_${i}`);
-    const fh=document.getElementById(`fh_${i}`);
-    const val=inp.value.trim().toLowerCase().replace(/'/g,"'");
-    const ans=ex.blank.toLowerCase().replace(/'/g,"'");
-    if(val===ans||val===ans.replace(/'/g,"'")){
-      inp.className='fill-in ok';fh.textContent=`✅ ¡Correcto! "${ex.blank}"`;fh.className='fill-hint ok';ok++;
-    } else {
-      inp.className='fill-in bad';fh.textContent=`❌ Respuesta: "${ex.blank}"`;fh.className='fill-hint bad';
-    }
-  });
-  const s=document.getElementById('fillScore');s.style.display='block';
-  const n=fillData.length;
-  const msg=ok>=n?'¡Perfecto! 🎉 ¡100%!':ok>=8?'¡Casi perfecto! 💪 ¡Muy bien!':ok>=6?'¡Buen trabajo! Repasa las fórmulas 🌟':ok>=4?'Sigue practicando 💜 ¡Tú puedes!':'Repasa WILL y WON'T y vuelve a intentarlo 🚀';
-  s.textContent=`📊 Resultado: ${ok}/${n} correctas. ${msg}`;
+function flipCard(id){
+  document.getElementById(id).classList.toggle('flipped');
 }
 
-// ════════════ HW QUESTIONS ════════════
-const hwListenQData=[
-  {q:'¿Qué hará Daniel el próximo verano?',opts:['Se irá de vacaciones','Se mudará a Canadá','Terminará la universidad','Conseguirá un trabajo'],c:1},
-  {q:'¿Dónde vivirá Daniel en Canadá?',opts:['En un hotel','En un apartamento solo','Con una familia anfitriona (host family)','En un dormitorio universitario'],c:2},
-  {q:'¿Quién acompañará a Daniel?',opts:['Su hermano/a','Su amigo','Su primo/a (cousin)','Su novio/a'],c:2},
-  {q:'¿Dónde trabajará Daniel a tiempo parcial?',opts:['En un supermercado','En una librería','En un restaurante','En una cafetería (coffee shop)'],c:3},
-  {q:'¿Cuándo volverá Daniel a casa?',opts:['En seis meses','En dos años','En un año','En tres meses'],c:2},
-];
-const hwReadQData=[
-  {q:'¿Qué será Carlos en 5 años según el texto?',opts:['Un actor famoso','Un futbolista profesional','Un cantante popular','Un chef famoso'],c:1},
-  {q:'¿Qué dice el texto que NO hará Carlos?',opts:['No entrenará todos los días','No beberá alcohol ni fumará','No ayudará a su comunidad','No recordará de dónde viene'],c:1},
-  {q:'¿Qué construirá Carlos para su comunidad?',opts:['Una escuela','Un hospital','Un centro deportivo (sports center)','Una biblioteca'],c:2},
-  {q:'¿Para quiénes serán las lecciones de entrenamiento gratuitas de Carlos?',opts:['Para sus amigos','Para adultos mayores','Para niños sin dinero','Para sus familiares'],c:2},
-  {q:'¿Cambiará Carlos cuando sea famoso?',opts:['Sí, cambiará mucho','Sí, olvidará sus raíces','No, no cambiará','No se sabe'],c:2},
-];
-
-// ════════════ TRANSLATIONS ════════════
-const transData=[
-  {es:'1. El próximo año yo viajaré a España.',en:'Next year, I will travel to Spain.',keys:['will','travel','spain']},
-  {es:'2. Ella estudiará inglés todos los días.',en:'She will study English every day.',keys:['will','study','english']},
-  {es:'3. Ellos no olvidarán tu cumpleaños.',en:"They won't forget your birthday.",keys:["won't",'forget','birthday']},
-  {es:'4. ¿Vendrá él a la fiesta?',en:'Will he come to the party?',keys:['will','come','party']},
-  {es:'5. Nosotros viviremos en una ciudad grande.',en:'We will live in a big city.',keys:['will','live','city']},
-  {es:'6. Yo te llamaré esta noche.',en:'I will call you tonight.',keys:['will','call','tonight']},
-  {es:'7. Él no comerá azúcar nunca más.',en:"He won't eat sugar anymore.",keys:["won't",'eat','sugar']},
-  {es:'8. ¿Ganarás el partido mañana?',en:'Will you win the game tomorrow?',keys:['will','win','tomorrow']},
-];
-function buildTrans(){
-  const tl=document.getElementById('transList');
-  transData.forEach((t,i)=>{
-    const d=document.createElement('div');d.className='trans-item';
-    d.innerHTML=`
-      <div class="trans-prompt">🇪🇸 ${t.es}</div>
-      <input type="text" class="trans-in" id="tr_${i}" placeholder="Escribe en inglés aquí..." autocomplete="off" spellcheck="false">
-      <div class="trans-fb" id="trfb_${i}"></div>`;
-    tl.appendChild(d);
-  });
-}
-function checkTrans(){
-  let ok=0;
-  transData.forEach((t,i)=>{
-    const inp=document.getElementById(`tr_${i}`);
-    const fb=document.getElementById(`trfb_${i}`);
-    const val=inp.value.trim().toLowerCase().replace(/'/g,"'");
-    const hit=t.keys.every(k=>val.includes(k.replace(/'/g,"'")))&&val.length>3;
-    if(hit){inp.className='trans-in ok';fb.textContent=`✅ ¡Muy bien! Respuesta: "${t.en}"`;fb.className='trans-fb show ok';ok++;}
-    else{inp.className='trans-in bad';fb.textContent=`❌ Respuesta correcta: "${t.en}"`;fb.className='trans-fb show bad';}
-  });
-  const s=document.getElementById('transScore');s.style.display='block';
-  const n=transData.length;
-  const msg=ok>=n?'¡Increíble! 🌟 ¡Dominas el WILL!':ok>=6?'¡Muy buen trabajo! 💪':ok>=4?'Sigue practicando las fórmulas 🚀':'Revisa las fórmulas de la clase e inténtalo de nuevo 💜';
-  s.textContent=`📊 Resultado: ${ok}/${n} correctas. ${msg}`;
+function checkOpt(el, chosen, correct, qid){
+  var parent = el.closest('.options');
+  var btns = parent.querySelectorAll('.opt');
+  btns.forEach(function(b){ b.disabled=true; });
+  var fb = document.getElementById('fb-'+qid);
+  if(!fb) return;
+  if(chosen===correct){
+    el.classList.add('selected-correct');
+    fb.className='feedback show good';
+    fb.innerHTML='✅ ¡Correcto! ¡Muy bien!';
+  } else {
+    el.classList.add('selected-wrong');
+    fb.className='feedback show bad';
+    fb.innerHTML='❌ No es correcto. Vuelve a revisar el texto/audio e inténtalo mentalmente.';
+    btns.forEach(function(b){ var l=b.querySelector('.opt-letter'); if(l&&l.textContent===correct){b.classList.add('selected-correct');} });
+  }
 }
 
-// ════════════ INIT ════════════
-document.addEventListener('DOMContentLoaded',()=>{
-  buildUses();
-  buildTimeGrid();
-  buildContractions();
-  buildShortAnswers();
-  buildQs(listenQData,'listenQs');
-  buildQs(readQData,'readQs');
-  buildWBank();buildFill();
-  buildQs(hwListenQData,'hwListenQs');
-  buildQs(hwReadQData,'hwReadQs');
-  buildTrans();
+function checkFill(inputId, acceptedAnswers, num, prefix){
+  var input = document.getElementById(inputId);
+  var fbId = prefix ? 'fb-'+prefix+'_w'+num : 'fb-w'+num;
+  var fb = document.getElementById(fbId);
+  if(!input||!fb) return;
+  var val = input.value.trim().toLowerCase().replace(/[?.!,]/g,'');
+  var ok = acceptedAnswers.some(function(a){ return val===a.toLowerCase().replace(/[?.!,]/g,''); });
+  if(ok){
+    fb.className='feedback show good';
+    fb.innerHTML='✅ ¡Excelente! Tu respuesta es correcta.';
+    input.style.borderColor='#22C55E';
+  } else {
+    fb.className='feedback show bad';
+    fb.innerHTML='❌ Revisa la estructura. Recuerda: Sujeto + will + verbo base (o won\'t para negación). ¡Inténtalo de nuevo!';
+    input.style.borderColor='#EF4444';
+  }
+}
+
+function checkFreeWrite(){
+  var txt = document.getElementById('freeWrite').value.trim().toLowerCase();
+  var fb = document.getElementById('fb-free');
+  if(!fb) return;
+  var hasWill = txt.indexOf('will')>-1 || txt.indexOf("won't")>-1 || txt.indexOf("won't")>-1 || txt.indexOf("'ll")>-1;
+  var lines = txt.split('\n').filter(function(l){ return l.trim().length>5; });
+  if(lines.length>=2 && hasWill){
+    fb.className='feedback show good';
+    fb.innerHTML='✅ ¡Genial! Veo que usaste WILL en tus oraciones. ¡Sigue practicando así!';
+  } else if(!hasWill){
+    fb.className='feedback show bad';
+    fb.innerHTML='❌ No veo la palabra WILL, WON\'T o la contracción \'LL en tus oraciones. Recuerda que debes usar el futuro.';
+  } else {
+    fb.className='feedback show info';
+    fb.innerHTML='💡 Buen intento. Intenta escribir al menos 3 oraciones completas usando WILL.';
+  }
+}
+
+function checkHwFree(){
+  var txt = document.getElementById('hwFreeWrite').value.trim().toLowerCase();
+  var fb = document.getElementById('fb-hwfree');
+  if(!fb) return;
+  var hasWill = txt.indexOf('will')>-1 || txt.indexOf("won't")>-1 || txt.indexOf("'ll")>-1;
+  var lines = txt.split('\n').filter(function(l){ return l.trim().length>5; });
+  if(lines.length>=2 && hasWill){
+    fb.className='feedback show good';
+    fb.innerHTML='✅ ¡Perfecto! Usaste WILL correctamente. ¡Buen trabajo en casa!';
+  } else if(!hasWill){
+    fb.className='feedback show bad';
+    fb.innerHTML='❌ No veo WILL en tus oraciones. Recuerda usar will / won\'t / \'ll para el futuro.';
+  } else {
+    fb.className='feedback show info';
+    fb.innerHTML='💡 ¡Casi! Intenta escribir las 3 oraciones completas.';
+  }
+}
+
+function finishClass(){
+  goTo(6);
+  setTimeout(function(){
+    var msg = document.getElementById('congratsMsg');
+    if(msg) msg.style.display='block';
+  }, 300);
+}
+
+document.getElementById('freeWrite').addEventListener('input', function(){
+  document.getElementById('cc').textContent = this.value.length + ' caracteres';
 });
+document.getElementById('hwFreeWrite').addEventListener('input', function(){
+  document.getElementById('hwcc').textContent = this.value.length + ' caracteres';
+});
+
+updateProgress();
 </script>
 </body>
 </html>
